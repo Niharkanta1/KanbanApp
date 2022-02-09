@@ -1,0 +1,56 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'me.nihar'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation "org.springframework.boot:spring-boot-starter-mail"
+	implementation "org.springframework.boot:spring-boot-starter-logging"
+	implementation "org.springframework.security:spring-security-config"
+	implementation "org.springframework.security:spring-security-web"
+	implementation "org.zalando:problem-spring-web-starter:0.26.1"
+	implementation "io.jsonwebtoken:jjwt-api:0.11.2"
+	implementation "io.jsonwebtoken:jjwt-impl:0.11.2"
+	implementation "io.jsonwebtoken:jjwt-jackson:0.11.2"
+
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.1.0'
+	implementation "com.fasterxml.jackson.core:jackson-annotations"
+	implementation "com.fasterxml.jackson.core:jackson-databind"
+	implementation "com.zaxxer:HikariCP"
+	implementation "org.apache.commons:commons-lang3"
+	implementation "org.hibernate:hibernate-core"
+	implementation "org.hibernate:hibernate-entitymanager"
+	implementation "org.hibernate.validator:hibernate-validator"
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

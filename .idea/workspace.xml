@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b8217ce7-4629-4c43-ba60-9919ebb8c150" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/src/main/java/me/nihar/kanban/KanbanAppApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/kanban-app/src/test/java/me/nihar/kanban/KanbanAppApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/browserslist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/e2e/protractor.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/e2e/src/app.po.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/e2e/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/karma.conf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/app/app.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/environments/environment.prod.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/environments/environment.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/polyfills.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/src/test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/tsconfig.spec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/kanban-ui/tslint.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="24pTuADUTeEtE8yXlMN1eOwXoMN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/kanban-app" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b8217ce7-4629-4c43-ba60-9919ebb8c150" name="Changes" comment="" />
+      <created>1644326751620</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1644326751620</updated>
+    </task>
+    <servers />
+  </component>
+</project>
