@@ -69,6 +69,19 @@ public class UserService {
 		return newUser;
 	}
 
+	public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+		SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByUserName).ifPresent(user -> {
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			if (email != null) {
+				user.setEmail(email.toLowerCase());
+			}
+			user.setLangKey(langKey);
+			user.setImageUrl(imageUrl);
+			log.debug("Changed Information for User: {}", user);
+		});
+	}
+
 	@Transactional(readOnly = true)
 	public Optional<User> getUserWithAuthoritiesByLogin(String username) {
 		return userRepository.findOneWithAuthoritiesByUserName(username);
@@ -77,6 +90,13 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public Optional<User> getUserWithAuthorities() {
 		return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByUserName);
+	}
+
+	public void deleteUser(String login) {
+		userRepository.findOneByUserName(login).ifPresent(user -> {
+			userRepository.delete(user);
+			log.debug("Deleted User: {}", user);
+		});
 	}
 
 	private boolean removeNonActivatedUser(User existingUser) {
