@@ -6,7 +6,6 @@ import me.nihar.kanban.security.jwt.JWTFilter;
 import me.nihar.kanban.security.jwt.JWTToken;
 import me.nihar.kanban.security.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

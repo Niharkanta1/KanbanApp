@@ -1,6 +1,7 @@
 <mat-toolbar>
     <span>Kanban App</span>
     <span class="header-spacer"></span>
-    <button mat-flat-button>Login</button>
-    <button mat-flat-button color="primary">SignUp</button>
+    <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button>
+    <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/signup']" routerLinkActive="router-link-active"  color="primary">SignUp</button>
+    <button *ngIf="loginCheck()" (click)="logout()" mat-flat-button color="accent">Logout</button>
 </mat-toolbar>

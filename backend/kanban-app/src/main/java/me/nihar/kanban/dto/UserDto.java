@@ -1,14 +1,12 @@
 package me.nihar.kanban.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.nihar.kanban.entity.Authority;
 import me.nihar.kanban.entity.User;
 import me.nihar.kanban.utils.Constants;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,6 +17,7 @@ import java.util.stream.Collectors;
  */
 
 @Data
+@NoArgsConstructor
 public class UserDto {
 	public static final int PASSWORD_MIN_LENGTH = 4;
 	public static final int PASSWORD_MAX_LENGTH = 100;
@@ -42,6 +41,8 @@ public class UserDto {
 	@Email
 	@Size(min = 5, max = 254)
 	private String email;
+
+	private String phoneNumber;
 
 	@Size(max = 256)
 	private String imageUrl;

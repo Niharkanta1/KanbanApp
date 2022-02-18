@@ -1,13 +1,8 @@
 package me.nihar.kanban.security.jwt;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.jni.Local;
-
-import java.time.Instant;
 
 /*
  * @created 09-02-2022
