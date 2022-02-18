@@ -40,7 +40,6 @@ import static java.lang.String.format;
 		prePostEnabled = true
 )
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	String contentSecurityPolicy = "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:";
 
 	private final DomainUserDetailsService userService;
 	private final JWTFilter jwtFilter;
@@ -54,7 +53,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
