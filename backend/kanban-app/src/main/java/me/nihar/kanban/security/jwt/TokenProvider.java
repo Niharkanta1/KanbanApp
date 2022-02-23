@@ -5,19 +5,17 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
+import me.nihar.kanban.security.DomainUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static me.nihar.kanban.utils.DateTimeUtil.getDateString;
@@ -31,9 +29,11 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @Slf4j
 @Component
 public class TokenProvider {
-	private static final String AUTHORITIES_KEY = "auth";
+	public static final String USER_ID = "UserId";
+	public static final String EMAIL = "Email";
+	private static final String AUTHORITIES_KEY = "Roles";
+	public static final String FULL_NAME = "FullName";
 	private static final String INVALID_JWT_TOKEN = "Invalid JWT token.";
-
 
 	private String secret, base64Secret;
 	private Long tokenValidityInMilliseconds;
@@ -72,10 +72,16 @@ public class TokenProvider {
 		} else {
 			validity = new Date(now + this.tokenValidityInMilliseconds);
 		}
+		DomainUser user = (DomainUser) authentication.getPrincipal();
+		Map<String, Object> claims = new HashMap<>();
+		claims.put(AUTHORITIES_KEY, authorities);
+		claims.put(USER_ID, user.getId());
+		claims.put(EMAIL, user.getEmail());
+		claims.put(FULL_NAME, user.getFullName());
 
 		String jwt = Jwts.builder()
 				.setSubject(authentication.getName())
-				.claim(AUTHORITIES_KEY, authorities)
+				.addClaims(claims)
 				.signWith(key, SignatureAlgorithm.HS256)
 				.setExpiration(validity)
 				.compact();
@@ -111,8 +117,10 @@ public class TokenProvider {
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 
-		User principal = new User(claims.getSubject(), "", authorities);
-
+		DomainUser principal = new DomainUser(claims.getSubject(), "",
+				authorities, Long.valueOf( (Integer) claims.get(USER_ID)), (String) claims.get(FULL_NAME),
+				(String) claims.get(EMAIL));
 		return new UsernamePasswordAuthenticationToken(principal, token, authorities);
 	}
+
 }

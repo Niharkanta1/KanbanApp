@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     DashboardComponent,
     HomeComponent,
     SignupComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    SideNavComponent,
+    WorkspaceComponent
   ],
   imports: [
     BrowserModule,

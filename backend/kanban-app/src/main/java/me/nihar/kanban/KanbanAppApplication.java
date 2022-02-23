@@ -1,19 +1,19 @@
 package me.nihar.kanban;
 
-import org.springdoc.core.SpringDocUtils;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class KanbanAppApplication {
-
-	static {
-		SpringDocUtils.getConfig().addHiddenRestControllers(BasicErrorController.class);
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(KanbanAppApplication.class, args);
 	}
 
+	@Bean
+	public JavaTimeModule dateTimeModule(){
+		return new JavaTimeModule();
+	}
 }

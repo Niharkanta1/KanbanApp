@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  @Output() menuState = new EventEmitter();
+  showMenu = false;
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
@@ -21,5 +22,11 @@ export class HeaderComponent implements OnInit {
     console.log("logging out...")
     this.authService.doLogout();
   } 
+
+  toggleMenu() {
+    if(!this.loginCheck()) return;
+    this.showMenu = !this.showMenu;
+    this.menuState.emit(this.showMenu);
+ }
 
 }

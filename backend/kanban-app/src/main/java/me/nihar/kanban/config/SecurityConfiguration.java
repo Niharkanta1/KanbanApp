@@ -4,14 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import me.nihar.kanban.security.AuthoritiesConstants;
 import me.nihar.kanban.security.DomainUserDetailsService;
 import me.nihar.kanban.security.jwt.JWTFilter;
-import me.nihar.kanban.service.UserService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,8 +22,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
-
-import static java.lang.String.format;
 
 /*
  * @created 09-02-2022
@@ -60,6 +57,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
+	public void configure(WebSecurity web) {
+		web.ignoring()
+				.antMatchers(HttpMethod.OPTIONS, "/**")
+				.antMatchers("/app/**/*.{js,html}")
+				.antMatchers("/i18n/**")
+				.antMatchers("/content/**")
+				.antMatchers("/h2-console/**")
+				.antMatchers("/swagger-ui/**")
+				.antMatchers("/v3/api-docs/**")
+				.antMatchers("/test/**");
+	}
+
+	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		// Enable CORS and disable CSRF
 		http = http.cors().and().csrf().disable();
@@ -71,19 +81,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		// Set unauthorized requests exception handler
 		http = http.exceptionHandling().authenticationEntryPoint((request, response, ex) -> {
-							log.error("Unauthorized request - {}", ex.getMessage());
-							response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-						}
-				).and();
+			log.error("Unauthorized request - {}", ex.getMessage());
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+		}).and();
 
 		// Set permissions on endpoints
-		http.authorizeRequests()
+		http.authorizeRequests() //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 				// Swagger endpoints must be publicly accessible
 				.antMatchers("/").permitAll()
-				.antMatchers("/v3/**").permitAll()
-				.antMatchers("/rest-api-docs/**").permitAll()
-				.antMatchers("/swagger-ui/**").permitAll()
 				// Our public endpoints
+				.antMatchers( HttpMethod.GET,"/swagger-ui/**",
+						"/v2/**",
+						"/swagger-resources/**",
+						"/swagger-ui.html**",
+						"/webjars/**",
+						"favicon.ico").permitAll()
 				.antMatchers("/api/public/**").permitAll()
 				// Our private endpoints
 				.antMatchers("/api/authenticate").permitAll()

@@ -5,3 +5,23 @@
 .mat-button-base {
     margin: 8px 8px 8px 0;
 }
+
+.icon-margin {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.workspaces {
+    margin-left: 10px;
+}
+
+.menu_button {
+    font-size: 16px;
+}
+
+.create_button {
+    background-color: #5462ae;
+}
+.create_button:hover {
+    background-color: #324191;
+}

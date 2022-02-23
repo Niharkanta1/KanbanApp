@@ -5,13 +5,13 @@
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
                 <mat-form-field>
                     <input type="text" matInput placeholder="Username or Email" formControlName="login">
-                    <mat-error *ngIf="loginForm.controls['login'].invalid">
+                    <mat-error *ngIf="login.invalid">
                         {{getError('user')}}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <input type="password" matInput placeholder="Password" formControlName="password">
-                    <mat-error *ngIf="loginForm.controls['password'].invalid">
+                    <mat-error *ngIf="password.invalid">
                         {{getError('pass')}}
                     </mat-error>
                 </mat-form-field>

@@ -14,7 +14,8 @@ import me.nihar.kanban.errors.EmailAlreadyUsedException;
 import me.nihar.kanban.errors.InvalidPasswordException;
 import me.nihar.kanban.repository.UserRepository;
 import me.nihar.kanban.service.UserService;
-import me.nihar.kanban.utils.SecurityUtils;
+import me.nihar.kanban.service.WorkspaceService;
+import me.nihar.kanban.utils.AuthUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +30,12 @@ import java.util.Optional;
 public class AccountResource {
 	private final UserRepository userRepository;
 	private final UserService userService;
+	private final WorkspaceService workspaceService;
 
-	public AccountResource(UserRepository userRepository, UserService userService) {
+	public AccountResource(UserRepository userRepository, UserService userService, WorkspaceService workspaceService) {
 		this.userRepository = userRepository;
 		this.userService = userService;
+		this.workspaceService = workspaceService;
 	}
 
 	@PostMapping("/register")
@@ -43,6 +46,8 @@ public class AccountResource {
 			throw new InvalidPasswordException();
 		}
 		User user = userService.registerUser(userDto);
+		workspaceService.createDefaultWorkspace(user);
+
 		return new StringBuilder("User created!")
 				.append(" with username::").append(user.getUserName())
 				.append(" and with userId::").append(user.getId())
@@ -63,7 +68,7 @@ public class AccountResource {
 
 	@PostMapping("/account")
 	public String saveAccount(@Valid @RequestBody UserDto userDto) {
-		String userLogin = SecurityUtils
+		String userLogin = AuthUtils
 				.getCurrentUserLogin()
 				.orElseThrow(() -> new AccountResourceException("Current user login not found"));
 		Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDto.getEmail());

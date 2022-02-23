@@ -1,7 +1,21 @@
-<mat-toolbar>
-    <span>Kanban App</span>
+<mat-toolbar color="primary">
+    <!--<div class="icon-margin" >
+        <mat-icon>menu</mat-icon> 
+    </div> -->
+    <button mat-mini-fab color="primary" class="create_button" aria-label="Menu" (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span class="title">Kanban App</span>
+    <div class="workspaces" >
+        <button mat-button [matMenuTriggerFor]="menu" class="menu_button">Workspaces<mat-icon>keyboard_arrow_down</mat-icon></button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item>Default Workspace</button>
+        <button mat-menu-item>Custom Workspace</button>
+    </mat-menu>
+    </div>
+    <button mat-flat-button color="primary" class="create_button">Create</button>
     <span class="header-spacer"></span>
     <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button>
-    <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/signup']" routerLinkActive="router-link-active"  color="primary">SignUp</button>
+    <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/signup']" routerLinkActive="router-link-active" >SignUp</button>
     <button *ngIf="loginCheck()" (click)="logout()" mat-flat-button color="accent">Logout</button>
 </mat-toolbar>

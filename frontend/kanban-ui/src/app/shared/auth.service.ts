@@ -11,7 +11,7 @@ import { SnackbarCommon } from "./snackbar-common";
     providedIn: 'root'
 })
 export class AuthService {
-    endpoint: string = 'http://localhost:8080/kanban-app/api';
+    endpoint: string = 'http://localhost:8080/api';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     currentUser: User;
     isLoginFailed: boolean;
@@ -28,7 +28,7 @@ export class AuthService {
     signUp(user: User): Observable<any> {
         let api = `${this.endpoint}/register`;
         user.login = user.username;
-        return this.http.post<User>(api, JSON.stringify(user), this.httpOptions).pipe(retry(1), catchError(this.handleError));
+        return this.http.post<User>(api, JSON.stringify(user), this.httpOptions).pipe(catchError(this.handleError));
     }
 
     signIn(user: Login) {
@@ -42,16 +42,20 @@ export class AuthService {
                 this.router.navigate(['home']);
             });         
         }, err => {
-            if(err.error.status === 401) {
-                this.errorMessage = "Invalid Login/Password!";
-            } else {
-                this.errorMessage = err.error.message;                
-            }
-             
-            console.log(err.error);
-            this.snackbar.openSnackBar( this.errorMessage, 5, "error-snackbar");
-            this.isLoginFailed = true;
+            this.handleLoginError(err);
         });
+    }
+
+    private handleLoginError(err: any) {
+        if (err.error.status === 401) {
+            this.errorMessage = "Invalid Login/Password!";
+        } else {
+            this.errorMessage = err.error.message;
+        }
+
+        console.log(err.error);
+        this.snackbar.openSnackBar(this.errorMessage, 5, "error-snackbar");
+        this.isLoginFailed = true;
     }
 
     getUserHome(id): Observable<any> {

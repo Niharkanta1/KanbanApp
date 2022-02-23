@@ -1,0 +1,37 @@
+.container {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    top: 64px !important;
+}
+
+@media(max-width: 599px) {
+    #container {
+        top: 48px !important;
+    }
+}
+
+.sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidenav {
+    padding: 20px;
+}
+
+.mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.align_right {
+    margin-left: auto; 
+    margin-right: 0;
+}
+.icon_botton {
+    color: #757575;
+}
+
+.icon_botton:hover {
+    color: #000;
+}

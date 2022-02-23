@@ -98,7 +98,7 @@ export class SignupComponent implements OnInit {
           return 'Email is required';
         }
         break;
-      case 'phoneNo':
+      case 'phoneNumber':
         if (this.phoneNumber.hasError('pattern')) {
           return 'Phone Number can contain only 0-9';
         }

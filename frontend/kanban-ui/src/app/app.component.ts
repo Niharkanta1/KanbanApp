@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'kanban-ui';
+
+  subMenuState:boolean = false;
+  burgerClicked(evnt){
+    this.subMenuState = evnt;
+  }
+
 }

@@ -6,6 +6,7 @@ package me.nihar.kanban.entity;
  * @author Nihar
  */
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +19,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
 
 @Getter
 @Setter
@@ -33,8 +35,8 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 8282960297009620822L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-	@SequenceGenerator(name = "sequenceGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+	@SequenceGenerator(name = "user_sequence")
 	@Column(name = "id")
 	private Long id;
 
@@ -65,7 +67,8 @@ public class User implements Serializable {
 
 	@NotNull
 	@Column(name = "join_date", nullable = false)
-	private Instant joinDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private Date joinDate;
 
 	@Column(name = "title")
 	private String title;
@@ -93,19 +96,8 @@ public class User implements Serializable {
 	private String resetKey;
 
 	@Column(name = "reset_date")
-	private Instant resetDate = null;
-
-	@Column(name = "date_created")
-	private Instant dateCreated = new Date().toInstant();
-
-	@Column(name = "user_created")
-	private String userCreated;
-
-	@Column(name = "date_modified")
-	private Instant dateModified;
-
-	@Column(name = "user_modified")
-	private String userModified;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private Date resetDate = null;
 
 	@JsonIgnore
 	@ManyToMany
@@ -117,7 +109,39 @@ public class User implements Serializable {
 	@BatchSize(size = 20)
 	private Set<Authority> authorities = new HashSet<>();
 
+	public User(Long id) {
+		this.id = id;
+	}
+
+	public User() {}
+
 	public void setUserName(String login) {
 		this.userName = StringUtils.lowerCase(login, Locale.ENGLISH);
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = capitalize(firstName);
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = capitalize(lastName);
+	}
+
+	public void setTitle(String title) {
+		this.title = capitalize(title);
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", userName='" + userName + '\'' +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", email='" + email + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", joinDate=" + joinDate +
+				", authorities=" + authorities +
+				'}';
 	}
 }
