@@ -1,1 +1,23 @@
-<p>workspace works!</p>
+<div class="workspace">
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Boards" selected>
+            <div class="workspace-content">
+                <app-workspace-boards></app-workspace-boards>
+            </div>
+        </mat-tab>
+        <mat-tab label="Members">
+            <div class="workspace-content">
+                <app-workspace-members>
+    
+                </app-workspace-members>
+            </div>
+        </mat-tab>
+        <mat-tab label="Settings">
+            <div class="workspace-content">
+                <app-workspace-settings></app-workspace-settings>
+            </div>
+        </mat-tab>
+        <mat-tab disabled></mat-tab>
+        <mat-tab disabled></mat-tab>
+    </mat-tab-group>
+</div>

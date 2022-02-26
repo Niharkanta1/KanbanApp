@@ -11,7 +11,7 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 
 const routes: Routes = [
   { path:'', redirectTo: '/welcome', pathMatch: 'full' },
-  { path:'welcome', component:WelcomeComponent  },
+  { path:'welcome', component:LoginComponent },
   { path:'login', component:LoginComponent },
   { path:'signup', component:SignupComponent },
   { path:'home', component: HomeComponent, canActivate: [AuthGuard] },

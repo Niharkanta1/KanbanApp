@@ -10,10 +10,20 @@
 }
 
 .sidenav-content {
-    display: flex;
     height: 100%;
-    align-items: center;
+    width: 100%;
+    margin-top: 10px;
     justify-content: center;
+}
+
+.content-card {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.mat-card-title {
+    font-size: l;
 }
 
 .sidenav {
@@ -35,3 +45,7 @@
 .icon_botton:hover {
     color: #000;
 }
+/*
+mat-grid-tile {
+    background: lightblue;
+} */

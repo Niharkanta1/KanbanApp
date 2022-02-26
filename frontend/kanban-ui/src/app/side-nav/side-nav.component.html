@@ -1,26 +1,50 @@
 <mat-drawer-container class="container" fullscreen>
-    <mat-drawer #drawer class="sidenav" mode="side">
-        <div>
-            <mat-list>
-                <div mat-subheader>Default Workspace <mat-icon class="align_right icon_botton" (click)="ngOnChanges()">keyboard_backspace</mat-icon></div>
-                <mat-list-item *ngFor="let folder of folders">
-                  <mat-icon mat-list-icon>folder</mat-icon>
-                  <div mat-line>{{folder.name}}</div>
-                  <div mat-line> {{folder.updated | date}} </div>
-                </mat-list-item>
-                <mat-divider></mat-divider>
-                <div mat-subheader>Boards</div>
-                <mat-list-item *ngFor="let note of notes">
-                  <mat-icon mat-list-icon>note</mat-icon>
-                  <div mat-line>{{note.name}}</div>
-                  <div mat-line> {{note.updated | date}} </div>
-                </mat-list-item>
-              </mat-list>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <div>
+      <mat-list>
+        <div mat-subheader>Default Workspace <mat-icon class="align_right icon_botton" (click)="ngOnChanges()">
+            keyboard_backspace</mat-icon>
         </div>
-    </mat-drawer>
-  
-    <div class="sidenav-content">
-      <div *ngIf="isLoggedIn()"></div>
+        <mat-list-item *ngFor="let folder of folders">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <div mat-line>{{folder.name}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Boards</div>
+        <mat-list-item *ngFor="let note of notes">
+          <mat-icon mat-list-icon>note</mat-icon>
+          <div mat-line>{{note.name}}</div>
+          <div mat-line> {{note.updated | date}} </div>
+        </mat-list-item>
+      </mat-list>
     </div>
-  
-  </mat-drawer-container>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <div *ngIf="isLoggedIn()">
+      <mat-grid-list cols="4" rowHeight="7:1">
+        <mat-grid-tile rowspan="3"></mat-grid-tile>
+        <mat-grid-tile rowspan="3" colspan="2">
+
+          <div class="content-card">
+            <mat-card>
+              <div>
+                <mat-card-title>Default Workspace</mat-card-title>
+                <mat-card-subtitle>Description</mat-card-subtitle>
+                <mat-card-actions>
+                  <button mat-raised-button color="primary">Edit Workspace</button>
+                  &nbsp;
+                  <mat-slide-toggle>Make Default</mat-slide-toggle>
+                </mat-card-actions>
+              </div>
+            </mat-card>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile rowspan="3"></mat-grid-tile>
+      </mat-grid-list>
+      <br>
+      <app-workspace></app-workspace>
+    </div>
+  </div>
+
+</mat-drawer-container>

@@ -1,3 +1,4 @@
 <app-header (menuState)='burgerClicked($event)'></app-header>
-<app-side-nav [subMenuState]="subMenuState"></app-side-nav>
+<app-side-nav [subMenuState]="subMenuState" *ngIf="loginCheck()" (welcomePageLoadEvent)="hideSideBar($event)"></app-side-nav>
 <router-outlet></router-outlet>
+

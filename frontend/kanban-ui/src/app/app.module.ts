@@ -16,6 +16,9 @@ import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
+import { BoardsComponent } from './workspace/boards/boards.component';
+import { SettingsComponent } from './workspace/settings/settings.component';
+import { MembersComponent } from './workspace/members/members.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { WorkspaceComponent } from './workspace/workspace.component';
     SignupComponent,
     WelcomeComponent,
     SideNavComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    BoardsComponent,
+    SettingsComponent,
+    MembersComponent
   ],
   imports: [
     BrowserModule,

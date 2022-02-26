@@ -101,7 +101,7 @@ public class WorkspaceResource {
 	@GetMapping("/workspaces")
 	public List<Workspace> getAllWorkspaces() {
 		log.debug("REST request to get all Workspaces");
-		return workspaceService.findAll();
+		return workspaceService.findAllForCurrentUser();
 	}
 
 	@GetMapping("/workspaces/{id}")

@@ -35,6 +35,7 @@ public class JWTFilter extends OncePerRequestFilter {
 		log.info("Request received with JWT :: {}", jwt);
 		if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
 			Authentication authentication = this.tokenProvider.getAuthentication(jwt);
+			log.info("______________________________ User Logged in as:: {} ______________________________", authentication.getName());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
 		chain.doFilter(request, response);

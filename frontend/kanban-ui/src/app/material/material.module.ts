@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule, MatButtonToggleModule, MatCardModule, MatIconModule, MatListModule, MatMenuModule, MatSidenavModule, MatSnackBarModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatButtonToggleModule, MatCardModule, MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatTabsModule, MatToolbarModule } from '@angular/material';
 
 const components = [
   MatToolbarModule,
@@ -14,7 +14,12 @@ const components = [
   MatMenuModule,
   MatSidenavModule,
   MatButtonToggleModule,
-  MatListModule
+  MatListModule,
+  MatTabsModule,
+  MatGridListModule,
+  MatSlideToggleModule,
+  MatSelectModule,
+  MatRippleModule
 ]
 
 @NgModule({

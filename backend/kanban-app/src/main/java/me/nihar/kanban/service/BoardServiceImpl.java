@@ -24,6 +24,17 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired private BoardRepository boardRepository;
 
 	@Override
+	public Board save(Board board) {
+		log.info("Request to save Board:: {}", board);
+		if(board.getId() != null) {
+			board.onUpdate();
+		} else {
+			board.onCreate();
+		}
+		return boardRepository.save(board);
+	}
+
+	@Override
 	public Board saveBoardForWorkspace(Board board, Workspace workspace) {
 		log.info("Request to save Board:: board name::{} with Workspace:: workspace name::{}", board.getName(), workspace.getName());
 		board.setWorkspace(workspace);
@@ -66,9 +77,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Board> findAllForWorkspace(Workspace workspace) {
-		log.info("Request to find all boards for workspace::{}", workspace);
-		return boardRepository.findByWorkspaceId(workspace.getId());
+	public List<Board> findAllForWorkspace(Long workspaceId) {
+		log.info("Request to find all boards for workspace::{}", workspaceId);
+		return boardRepository.findByWorkspaceId(workspaceId);
 	}
 
 	@Override

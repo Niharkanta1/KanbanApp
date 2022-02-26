@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material';
 import { AuthService } from '../shared/auth.service';
+import { User } from '../shared/model/User';
 
 @Component({
   selector: 'app-side-nav',
@@ -10,6 +11,7 @@ import { AuthService } from '../shared/auth.service';
 export class SideNavComponent implements OnInit {
   @Input() subMenuState;
   @ViewChild('drawer', { static: false }) public drawer: MatDrawer;
+  currentUser: User;
 
   folders: Section[] = [
     {
@@ -41,6 +43,9 @@ export class SideNavComponent implements OnInit {
   }
 
   isLoggedIn() {
+    if(this.authService.isLoggedIn) {
+      this.currentUser = this.authService.currentUser;
+    }
     return this.authService.isLoggedIn;
   }
 

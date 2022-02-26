@@ -14,8 +14,9 @@ import java.util.Optional;
 public interface BoardService {
 	Board saveBoardForWorkspace(Board board, Workspace workspace);
 	Optional<Board> partialUpdate(Board board);
-	List<Board> findAllForWorkspace(Workspace workspace);
+	List<Board> findAllForWorkspace(Long workspaceId);
 	Optional<Board> findOne(Long id);
 	Optional<Board> findByIdAndWorkspace(Long id, Workspace workspace);
 	void delete(Long id);
+	Board save(Board board);
 }

@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
+import { User } from '../shared/model/User';
+import { Workspace } from '../shared/model/Workspace';
+import { WorkspaceService } from '../shared/services/workspace/workspace.service';
 
 @Component({
   selector: 'app-header',
@@ -8,23 +11,47 @@ import { AuthService } from '../shared/auth.service';
 })
 export class HeaderComponent implements OnInit {
   @Output() menuState = new EventEmitter();
+  workspaces: Workspace[] = [];
+  loggedIn: boolean = false;
+  currentUser: User;
   showMenu = false;
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService,
+              public workspaceService: WorkspaceService) { }
 
   ngOnInit() {
+    if(this.authService.isLoggedIn) {
+      this.loggedIn = true;
+      this.currentUser = this.authService.currentUser;
+      this.getWorkspaces();
+    }
   }
 
-  loginCheck(): boolean {
-    return this.authService.isLoggedIn;
+  loginCheck() {
+    if(this.authService.currentUser) {
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
+    return this.loggedIn;
+  }
+
+  getWorkspaces() {
+    this.workspaceService.getAllWorkspaces().subscribe(res => {
+      this.workspaces = res;
+    }, err => {
+      console.log("Error::",err.error);
+    });
   }
 
   logout() {
     console.log("logging out...")
+    this.loggedIn = false;
     this.authService.doLogout();
   } 
 
   toggleMenu() {
-    if(!this.loginCheck()) return;
+    this.loginCheck();
+    if(!this.loggedIn) return;
     this.showMenu = !this.showMenu;
     this.menuState.emit(this.showMenu);
  }

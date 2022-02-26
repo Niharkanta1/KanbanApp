@@ -1,0 +1,26 @@
+mat-grid-tile {
+    background: lightblue;
+}
+
+.filters {
+    padding: 10px;
+}
+
+.tool-spacer {
+    flex: 1 1 auto;
+}
+
+.icon {
+    margin-right: 5px;
+}
+
+.ripple-container {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.card-block {
+    width: 100%;
+    height: 100%;
+}

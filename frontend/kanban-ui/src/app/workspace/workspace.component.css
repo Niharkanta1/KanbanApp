@@ -1,0 +1,11 @@
+.workspace {
+    position: relative;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.workspace-content {
+    height: auto;
+    width: auto;
+}
+
