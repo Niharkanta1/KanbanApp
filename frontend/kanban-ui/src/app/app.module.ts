@@ -19,6 +19,8 @@ import { WorkspaceComponent } from './workspace/workspace.component';
 import { BoardsComponent } from './workspace/boards/boards.component';
 import { SettingsComponent } from './workspace/settings/settings.component';
 import { MembersComponent } from './workspace/members/members.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CreateBoardDialogComponent } from './dialog/board/create-board-dialog/create-board-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { MembersComponent } from './workspace/members/members.component';
     WorkspaceComponent,
     BoardsComponent,
     SettingsComponent,
-    MembersComponent
+    MembersComponent,
+    CreateBoardDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,11 +47,14 @@ import { MembersComponent } from './workspace/members/members.component';
     HttpClientModule,
     FormsModule
   ],
+  exports: [],
+  entryComponents:  [CreateBoardDialogComponent],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+  { provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -68,6 +68,10 @@ export class AuthService {
         return (authToken !== null) ? true : false;
     }
 
+    removeToken() {
+        localStorage.removeItem('access_token');
+    }
+
     doLogout() {
         let removeToken = localStorage.removeItem('access_token');
         if (removeToken == null) {

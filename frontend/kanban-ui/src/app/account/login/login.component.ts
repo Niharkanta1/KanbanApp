@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]),
       rememberMe: ['']
     });
+    this.authService.removeToken();
    }
 
   ngOnInit() {

@@ -28,7 +28,8 @@ export class SignupComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       phoneNumber: new FormControl('', [Validators.pattern('[0-9]*')])
     }, { validators: passwordMatchValidator});    
-
+    this.authService.removeToken();
+    
   }
 
   ngOnInit() {

@@ -1,0 +1,17 @@
+<div mat-dialog-content>
+    <h1 mat-dialog-title>Create A New Board</h1>
+    <form [formGroup]="createBoardForm" *ngIf="createBoardForm" (ngSubmit)="onCreate()" novalidate>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Board Name" formControlName="name" required>
+            <mat-error *ngIf="boardName.invalid">
+                Board name is required!
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput placeholder="Description"></textarea>
+        </mat-form-field>
+        <div class="button">
+            <button [disabled]="!createBoardForm.valid" mat-raised-button color="primary" mat-button>Create</button>
+        </div>
+    </form>
+</div>

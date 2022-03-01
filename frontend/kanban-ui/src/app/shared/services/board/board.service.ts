@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Board } from '../../model/Board';
 import { envSettings } from 'src/app/env-settings';
 import { Workspace } from '../../model/Workspace';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +18,22 @@ export class BoardService {
   }
 
   getBoard(id:number) {
-    return this.http.get<Board[]>(envSettings.apiUrl + this.endpoint);
+    return this.http.get<Board[]>(envSettings.apiUrl + this.endpoint + `/${id}`);
   }
 
-  createBoard(board: Board) {
-    
+  createBoard(board: Board): Observable<Board> {
+    return this.http.post<Board>(envSettings.apiUrl + this.endpoint, board);    
   }
 
-  updateBoard(board: Board) {
-
+  updateBoard(board: Board): Observable<any> {
+    return this.http.put(envSettings.apiUrl + this.endpoint, board); 
   }
 
-  deleteBoard(id: number) {
-
+  deleteBoard(id: number): Observable<any> {
+    return this.http.delete(envSettings.apiUrl + this.endpoint + `/${id}`); 
   }
 
-  patchBoard(board: Board) {
-
+  patchBoard(board: Board): Observable<any> {
+    return this.http.put(envSettings.apiUrl + this.endpoint, board); 
   }
 }

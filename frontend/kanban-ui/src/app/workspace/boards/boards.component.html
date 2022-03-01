@@ -29,6 +29,13 @@
   </div>
   <div class="content-block">
     <mat-grid-list cols="4" rowHeight="4:1" gutterSize="10px">
+      <mat-grid-tile>
+        <div class="ripple-container" matRipple (click)="openCreateBoardDialog()">
+          <mat-card class="card-block">
+            Create New Board<mat-card-subtitle>Total boards: {{boardCount}}</mat-card-subtitle>
+          </mat-card>
+        </div>
+      </mat-grid-tile>
       <mat-grid-tile *ngFor="let card of cards">
         <div class="ripple-container" matRipple>
           <mat-card class="card-block">
