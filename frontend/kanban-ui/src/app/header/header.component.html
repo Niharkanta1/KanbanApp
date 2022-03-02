@@ -10,7 +10,7 @@
         <button mat-button [matMenuTriggerFor]="menu" class="menu_button" (click)="getWorkspaces()">Workspaces<mat-icon>
                 keyboard_arrow_down</mat-icon></button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let workspace of workspaces">{{workspace.name}}</button>
+            <button mat-menu-item *ngFor="let workspace of workspaces" (click)="selectWorkspace(workspace.id)">{{workspace.name}}</button>
         </mat-menu>
     </div>
     <button mat-button [matMenuTriggerFor]="createMenu" class="create_button">Create</button>

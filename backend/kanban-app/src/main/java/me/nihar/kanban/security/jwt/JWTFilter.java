@@ -32,9 +32,10 @@ public class JWTFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 		String jwt = resolveToken(request);
-		log.info("Request received with JWT :: {}", jwt);
+
 		if (StringUtils.hasText(jwt) && this.tokenProvider.validateToken(jwt)) {
 			Authentication authentication = this.tokenProvider.getAuthentication(jwt);
+			log.info("Request received with JWT :: {}", jwt);
 			log.info("______________________________ User Logged in as:: {} ______________________________", authentication.getName());
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}

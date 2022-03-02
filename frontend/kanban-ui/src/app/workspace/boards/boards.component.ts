@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardDialogComponent } from 'src/app/dialog/board/create-board-dialog/create-board-dialog.component';
 import { Board } from 'src/app/shared/model/Board';
@@ -10,33 +10,40 @@ import { BoardService } from 'src/app/shared/services/board/board.service';
   styleUrls: ['./boards.component.css']
 })
 export class BoardsComponent implements OnInit {
+  @Input() workspaceId: number;
   selectedSortType: number;
   selectedFilterType: number;
   board: Board = new Board();
   boardCount: number = 3;
 
   sortTypes: SortType[] = [
-    {value: 1, name: 'Recent Activity'},
-    {value: 2, name: 'Alphabetical A-Z'},
-    {value: 2, name: 'Alphabetical Z-A'},
+    { value: 1, name: 'Recent Activity' },
+    { value: 2, name: 'Alphabetical A-Z' },
+    { value: 2, name: 'Alphabetical Z-A' },
   ];
 
   filterTypes: FilterType[] = [
-    {value: 1, name: 'Activity'},
-    {value: 2, name: 'Category'},
-    {value: 3, name: 'Favorites'},
+    { value: 1, name: 'Activity' },
+    { value: 2, name: 'Category' },
+    { value: 3, name: 'Favorites' },
   ];
 
   cards: BoardCard[] = [
-    {value: 1, name: 'First Board'},
-    {value: 2, name: 'Second Board'},
-    {value: 3, name: 'Third Board'},
+    { value: 1, name: 'First Board' },
+    { value: 2, name: 'Second Board' },
+    { value: 3, name: 'Third Board' },
   ]
 
-  constructor(public boardService: BoardService, public dialog: MatDialog) {    
+  constructor(public boardService: BoardService, public dialog: MatDialog) {
   }
- 
+
   ngOnInit() {
+    this.boardService.getAllBoards(this.workspaceId).subscribe(result => {
+      console.log("Response boards:::", result);
+    }, error => {
+      console.log("Error====>", error.error);
+    });
+
   }
 
   openCreateBoardDialog(): void {
@@ -49,7 +56,7 @@ export class BoardsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.board = result;
-      if(this.board)
+      if (this.board)
         this.createBoard(this.board);
     });
   }
