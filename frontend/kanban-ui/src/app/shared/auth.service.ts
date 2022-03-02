@@ -24,7 +24,7 @@ export class AuthService {
 
     signUp(user: User): Observable<any> {
         user.login = user.username;
-        return this.http.post<User>(this.registerApi, JSON.stringify(user)).pipe(catchError(this.handleError));
+        return this.http.post<User>(this.registerApi, JSON.stringify(user));;
     }
 
     signIn(user: Login) {
@@ -84,6 +84,7 @@ export class AuthService {
         let errorMessage = '';
         if(error.error instanceof ErrorEvent) {
           // Get client-side error
+          console.log("Error::", error.error);
           errorMessage = error.error.message;
         } else {
           // Get server-side error

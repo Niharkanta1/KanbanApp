@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { ErrorResponse } from 'src/app/shared/model/ErrorResponse';
 import { SnackbarCommon } from 'src/app/shared/snackbar-common';
 import { passwordMatchValidator } from 'src/app/shared/validators/passwordMatch.validator';
 
@@ -14,6 +15,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   @Input() error: string | null;
   errorMessage: string;
+  errorResponse: ErrorResponse;
 
   constructor(public formBuilder: FormBuilder, 
               public authService: AuthService,
@@ -38,10 +40,15 @@ export class SignupComponent implements OnInit {
   registerMe(): void {
     this.authService.signUp(this.signupForm.value).subscribe((res: string) => {
       if(res.includes('User created')) {
-        this.snackbar.openSnackBar("Sign up successful! Please login with your username or email.", 5, 'success-snackbar');
+        this.snackbar.openSnackBar("Sign up successful! Please Login.", 5, 'success-snackbar');
         this.router.navigate(['/login']);
       } else {
         this.snackbar.openSnackBar("Something wrong! Please Try again.", 5, 'error-snackbar');
+      }
+    }, err => {
+      if(err.status === 500) {
+        this.errorResponse = err.error;
+        this.snackbar.openSnackBar(this.errorResponse.details.toString(), 5, 'error-snackbar');
       }
     });
   }

@@ -19,10 +19,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
@@ -33,6 +31,7 @@ import static org.apache.commons.lang3.StringUtils.capitalize;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 8282960297009620822L;
+	public static final String SPACE = " ";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
@@ -120,7 +119,13 @@ public class User implements Serializable {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = capitalize(firstName);
+		if(StringUtils.isNotBlank(firstName) && firstName.contains("")) {
+			var names = Arrays.stream(firstName.split(SPACE)).map(value->capitalize(value)).collect(Collectors.toList());
+			this.firstName = StringUtils.join(names, SPACE);
+		} else {
+			this.firstName = capitalize(firstName);
+		}
+		System.out.println(this.firstName);
 	}
 
 	public void setLastName(String lastName) {

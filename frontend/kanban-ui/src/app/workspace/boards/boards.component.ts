@@ -35,6 +35,7 @@ export class BoardsComponent implements OnInit {
   ]
 
   constructor(public boardService: BoardService, public dialog: MatDialog) {
+    
   }
 
   ngOnInit() {
@@ -43,7 +44,6 @@ export class BoardsComponent implements OnInit {
     }, error => {
       console.log("Error====>", error.error);
     });
-
   }
 
   openCreateBoardDialog(): void {
