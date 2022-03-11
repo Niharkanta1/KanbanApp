@@ -48,6 +48,9 @@ public class Workspace extends BaseEntity implements Serializable {
 	@Column(name = "website")
 	private String website;
 
+	@Column(name = "default")
+	private Boolean isDefault;
+
 	@OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "stageLists", "workspace" }, allowSetters = true)
 	private Set<Board> boards = new HashSet<>();

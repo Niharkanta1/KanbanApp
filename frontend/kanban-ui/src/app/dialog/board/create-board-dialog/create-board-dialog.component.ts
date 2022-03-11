@@ -30,7 +30,7 @@ export class CreateBoardDialogComponent implements OnInit {
   }
 
   onCancel(): void {
-    
+    console.log("Create board cancelled.");
   }
 
 }

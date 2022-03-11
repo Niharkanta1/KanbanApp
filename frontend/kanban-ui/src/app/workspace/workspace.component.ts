@@ -16,7 +16,12 @@ export class WorkspaceComponent implements OnInit {
   subscription: Subscription;
 
   constructor(public workspaceService: WorkspaceService, public commonService: CommonService) { 
+    
+  }
+
+  ngOnInit() {
     this.subscription = this.commonService.getSelectedWorkspaceId().subscribe(id => {
+      console.log("WorkspaceComponent::Getting selected workspace Id::", id);
       if (id) {
         this.currentWorkspaceId = id;
       }
@@ -38,8 +43,7 @@ export class WorkspaceComponent implements OnInit {
     }
 
     console.log("Workspace::", this.currentWorkspaceId, this.currentWorkspace);
-  }
 
-  ngOnInit() { }
+  }
 
 }

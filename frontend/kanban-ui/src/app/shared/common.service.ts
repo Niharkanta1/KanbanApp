@@ -11,6 +11,7 @@ export class CommonService implements OnInit {
     }
 
     setSelectedWorkspaceId(id: number) {
+        console.log("CommonService::Setting selected workspace Id::", id);
         this.workspaceSelect.next(id);
     }
 

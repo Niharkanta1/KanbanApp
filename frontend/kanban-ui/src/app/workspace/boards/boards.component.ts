@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBoardDialogComponent } from 'src/app/dialog/board/create-board-dialog/create-board-dialog.component';
+import { CommonService } from 'src/app/shared/common.service';
 import { Board } from 'src/app/shared/model/Board';
 import { BoardService } from 'src/app/shared/services/board/board.service';
 
@@ -34,16 +35,30 @@ export class BoardsComponent implements OnInit {
     { value: 3, name: 'Third Board' },
   ]
 
-  constructor(public boardService: BoardService, public dialog: MatDialog) {
-    
+  constructor(public boardService: BoardService, public commonService: CommonService, public dialog: MatDialog) {
+
   }
 
   ngOnInit() {
-    this.boardService.getAllBoards(this.workspaceId).subscribe(result => {
-      console.log("Response boards:::", result);
-    }, error => {
-      console.log("Error====>", error.error);
-    });
+    if (!this.workspaceId) {
+      this.commonService.getSelectedWorkspaceId().subscribe(result => {
+        console.log("Fetching workspaceId from commonservice", result);
+        if (result) {
+          this.workspaceId = result;
+          this.loadWorkspaces();
+        }
+      })
+    } else {
+      this.loadWorkspaces()
+    }
+  }
+  loadWorkspaces() {
+    console.log("BoardsComponent::Getting boards for selected workspace Id::", this.workspaceId);
+      this.boardService.getAllBoards(this.workspaceId).subscribe(result => {
+        console.log("Response boards:::", result);
+      }, error => {
+        console.log("Error====>", error.error);
+      });
   }
 
   openCreateBoardDialog(): void {

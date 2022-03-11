@@ -12,6 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 /*
  * @created 20-02-2022
@@ -29,6 +30,7 @@ public class SwaggerConfig {
 				.select()
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
+				.paths(Predicate.not(PathSelectors.regex("/error.*")))
 				.build();
 	}
 

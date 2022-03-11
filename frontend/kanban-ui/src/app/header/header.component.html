@@ -10,18 +10,24 @@
         <button mat-button [matMenuTriggerFor]="menu" class="menu_button" (click)="getWorkspaces()">Workspaces<mat-icon>
                 keyboard_arrow_down</mat-icon></button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let workspace of workspaces" (click)="selectWorkspace(workspace.id)">{{workspace.name}}</button>
+            <button mat-menu-item *ngFor="let workspace of workspaces"
+                (click)="selectWorkspace(workspace.id)">{{workspace.name}}</button>
         </mat-menu>
     </div>
     <button mat-button [matMenuTriggerFor]="createMenu" class="create_button">Create</button>
     <mat-menu #createMenu="matMenu" yPosition="below">
-        <button mat-menu-item>Create Workspace</button>
-        <button mat-menu-item>Create Board</button>
+        <button mat-menu-item (click)="openCreateWorkspaceDialog()">Create Workspace</button>
+        <button mat-menu-item (click)="openCreateBoardDialog()">Create Board</button>
     </mat-menu>
+    
     <span class="header-spacer"></span>
-    <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/login']"
-        routerLinkActive="router-link-active">Login</button>
-    <button *ngIf="!loginCheck()" mat-flat-button [routerLink]="['/signup']"
-        routerLinkActive="router-link-active">SignUp</button>
-    <button *ngIf="loginCheck()" (click)="logout()" mat-flat-button color="accent">Logout</button>
+    <div *ngIf="currentUsername"><span>User:: {{currentUsername}}</span>&nbsp;&nbsp;</div>
+    <div *ngIf="!loginCheck()">
+        <button mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button>
+        <button mat-flat-button [routerLink]="['/signup']" routerLinkActive="router-link-active">SignUp</button>
+    </div>
+    <div *ngIf="isLoogedOut">
+        <button (click)="logout()" mat-flat-button color="accent">Logout</button>
+    </div>
+    
 </mat-toolbar>

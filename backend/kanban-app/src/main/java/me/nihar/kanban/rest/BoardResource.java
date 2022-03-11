@@ -30,6 +30,7 @@ import static me.nihar.kanban.utils.Constants.APP_NAME;
  */
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class BoardResource {
 	private static final String ENTITY_NAME = "board";
 

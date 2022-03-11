@@ -1,17 +1,20 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, throwError } from "rxjs";
+import { Observable, Subject, throwError } from "rxjs";
 import { catchError, map, retry }  from "rxjs/operators";
 import { envSettings } from "../env-settings";
 import { Login } from "./model/Login";
 import { User } from "./model/User";
+import { WorkspaceService } from "./services/workspace/workspace.service";
 import { SnackbarCommon } from "./snackbar-common";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+    public getLoggedInName = new Subject();
+    public loggedOutEvent = new Subject();
     headers = new HttpHeaders().set('Content-Type', 'application/json');
     registerApi = `${envSettings.apiUrl}/register`;
     loginApi = `${envSettings.apiUrl}/authenticate`;
@@ -19,7 +22,10 @@ export class AuthService {
     isLoginFailed: boolean;
     errorMessage: string;
 
-    constructor(private http: HttpClient, public router: Router, public snackbar: SnackbarCommon) {
+    constructor(private http: HttpClient, 
+        public router: Router, 
+        public snackbar: SnackbarCommon, 
+        public workspace: WorkspaceService) {
     }
 
     signUp(user: User): Observable<any> {
@@ -33,6 +39,7 @@ export class AuthService {
             console.log("Success:: token::", res.token);
             this.getUserHome(1).subscribe((res) => {
                 this.currentUser = res;
+                this.getLoggedInName.next(this.currentUser.login);
                 console.log("Current User::", this.currentUser);
                 this.router.navigate(['home']);
             });         
@@ -56,6 +63,7 @@ export class AuthService {
     getUserHome(id): Observable<any> {
         console.log("Logged In as::", id);
         let api = `${envSettings.apiUrl}/account`;
+        this.workspace.loadWorkspacesForUSer(id);
         return this.http.get(api, { headers: this.headers });
     }
 
@@ -73,10 +81,12 @@ export class AuthService {
     }
 
     doLogout() {
+        this.getLoggedInName.next('Sign In');
         let removeToken = localStorage.removeItem('access_token');
         if (removeToken == null) {
           this.router.navigate(['welcome']);
         }
+        this.loggedOutEvent.next(true);
         console.log("Logout successful");
     }
     

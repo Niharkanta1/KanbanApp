@@ -11,6 +11,7 @@ import { User } from '../shared/model/User';
 export class SideNavComponent implements OnInit {
   @Input() subMenuState;
   @ViewChild('drawer', { static: false }) public drawer: MatDrawer;
+  selectedWorkspaceId: number;
   currentUser: User;
 
   folders: Section[] = [
