@@ -25,7 +25,6 @@ public class StageList extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = -2472075089893144516L;
 
-	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stage_sequence")
 	@SequenceGenerator(name = "stage_sequence")

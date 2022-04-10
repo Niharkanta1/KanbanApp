@@ -25,7 +25,6 @@ import java.util.Set;
 @Table(name="card")
 public class Card extends BaseEntity implements Serializable {
 
-	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_sequence")
 	@SequenceGenerator(name = "card_sequence")

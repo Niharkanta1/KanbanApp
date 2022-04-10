@@ -24,7 +24,7 @@ import java.util.Set;
 public class Workspace extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = -8382886138539179696L;
-	@NotNull
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "workspace_sequence")
 	@SequenceGenerator(name = "workspace_sequence")

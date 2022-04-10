@@ -24,7 +24,7 @@ import java.util.Set;
 public class Board extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 4012106187518249905L;
-	@NotNull
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_sequence")
 	@SequenceGenerator(name = "board_sequence")
