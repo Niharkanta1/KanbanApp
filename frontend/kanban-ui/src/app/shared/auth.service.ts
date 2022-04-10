@@ -36,6 +36,7 @@ export class AuthService {
     signIn(user: Login) {
         return this.http.post<any>(this.loginApi, user).subscribe((res: any) =>{
             localStorage.setItem('access_token', res.token);
+            localStorage.setItem('isLoggedIn', 'true');
             console.log("Success:: token::", res.token);
             this.getUserHome(1).subscribe((res) => {
                 this.currentUser = res;
@@ -78,13 +79,15 @@ export class AuthService {
 
     removeToken() {
         localStorage.removeItem('access_token');
+        localStorage.removeItem('isLoggedIn');
     }
 
     doLogout() {
         this.getLoggedInName.next('Sign In');
         let removeToken = localStorage.removeItem('access_token');
         if (removeToken == null) {
-          this.router.navigate(['welcome']);
+            localStorage.setItem('isLoggedIn', 'false');
+            this.router.navigate(['welcome']);
         }
         this.loggedOutEvent.next(true);
         console.log("Logout successful");

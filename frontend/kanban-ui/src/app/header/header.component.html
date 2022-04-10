@@ -26,7 +26,7 @@
         <button mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button>
         <button mat-flat-button [routerLink]="['/signup']" routerLinkActive="router-link-active">SignUp</button>
     </div>
-    <div *ngIf="isLoogedOut">
+    <div *ngIf="!isLoogedOut">
         <button (click)="logout()" mat-flat-button color="accent">Logout</button>
     </div>
     

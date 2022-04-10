@@ -15,6 +15,7 @@ export class BoardsComponent implements OnInit {
   selectedSortType: number;
   selectedFilterType: number;
   board: Board = new Board();
+  boards: Board[] = [];
   boardCount: number = 3;
 
   sortTypes: SortType[] = [
@@ -56,6 +57,7 @@ export class BoardsComponent implements OnInit {
     console.log("BoardsComponent::Getting boards for selected workspace Id::", this.workspaceId);
       this.boardService.getAllBoards(this.workspaceId).subscribe(result => {
         console.log("Response boards:::", result);
+        this.boards = result;
       }, error => {
         console.log("Error====>", error.error);
       });
@@ -78,7 +80,9 @@ export class BoardsComponent implements OnInit {
 
   createBoard(newBoard: Board) {
     console.log("Creating Board!==>", newBoard);
-    //this.boardService.createBoard(newBoard);
+    this.boardService.createBoard(newBoard, this.workspaceId).subscribe(result => {
+      console.log("Successfully created!", result);
+    });
   }
 }
 

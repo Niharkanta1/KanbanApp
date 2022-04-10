@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.isLoogedOut = true;
     this.authService.getLoggedInName.subscribe(user => {
       if(typeof user === 'string') {
         this.currentUsername = user;
@@ -56,7 +57,7 @@ export class HeaderComponent implements OnInit {
   }
 
   loginCheck() {
-    if (this.authService.currentUser) {
+    if (this.authService.isLoggedIn) {
       this.loggedIn = true;
       this.isLoogedOut = false;
     } else {
@@ -79,9 +80,10 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    console.log("logging out...")
+    console.log("logging out...");
+    this.isLoogedOut = true;
+    this.loggedIn = false;
     this.authService.doLogout();
-    this.loginCheck();
   }
 
   toggleMenu() {
