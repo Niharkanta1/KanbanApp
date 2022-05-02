@@ -18,11 +18,12 @@ Few Screenshots:
 Work Completed:
 1. Login/Logout
 2. Entities and Mappings for Different component.
-3. Crud Operations for some Components.
-4. User based Dashboard and Workspaces
-5. Create boards and Create Workspaces
-6. Update board and Update Workspace - WIP
-7. Sidebar UI and Functionalities - WIP
+3. Basic UI side validations in place
+4. Crud Operations for some Components.
+5. User based Dashboard and Workspaces
+6. Create boards and Create Workspaces
+7. Update board and Update Workspace - WIP
+8. Sidebar UI and Functionalities - WIP
 
 To-Do:
 1. Create Board and components
