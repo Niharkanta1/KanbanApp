@@ -1,13 +1,24 @@
 <div class="field">
   <label class="inputLabel">{{ label }}</label>
-  <div class="ui left icon input" *ngIf="hasIcon">
+  <div
+    class="ui left icon input"
+    *ngIf="hasIcon"
+    [ngClass]="inputType === 'password' ? 'right action' : ''"
+  >
     <input
       *ngIf="controlType === 'input'"
-      [type]="inputType"
+      [type]="typeStr"
       [formControl]="control"
       [placeholder]="placeholder"
     />
     <i [class]="iconClass"></i>
+    <div
+      class="ui icon button"
+      *ngIf="inputType === 'password'"
+      (click)="toggleEye()"
+    >
+      <i [class]="eyeIcon"></i>
+    </div>
   </div>
   <div *ngIf="!hasIcon">
     <input

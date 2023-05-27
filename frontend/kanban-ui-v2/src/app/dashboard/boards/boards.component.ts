@@ -8,6 +8,10 @@ import { Board } from 'src/app/shared/model/Board';
 })
 export class BoardsComponent implements OnInit {
   @Input() boards = [] as Board[];
+
+  filterByToggle = false;
+  sortByToggle = false;
+
   constructor() {}
 
   ngOnInit(): void {}

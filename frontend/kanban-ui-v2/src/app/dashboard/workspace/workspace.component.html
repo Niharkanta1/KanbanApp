@@ -1,22 +1,38 @@
 <div class="ui padded grid">
   <h2 class="ui header"></h2>
 </div>
-
-<h2 class="ui header">
-  <div class="ui circular image circles">
-    <div>{{ getInitials(workspace.name) }}</div>
-    <div>
-      <img src="assets/images/Logo_Circle.png" class="image" *ngIf="false" />
-      <!-- Workspace Image impl -->
+<div class="ui clearing segment">
+  <h2 class="ui left floated header">
+    <div class="ui circular image circles">
+      <div>{{ getInitials(workspace.name) }}</div>
+      <div>
+        <img src="assets/images/Logo_Circle.png" class="image" *ngIf="false" />
+        <!-- Workspace Image impl -->
+      </div>
     </div>
-  </div>
-  <div class="content">
-    {{ workspace.name }} ({{ workspace.shortName }})
-    <div class="sub header">
-      {{ workspace.category }}
+    <div class="content">
+      {{ workspace.name }} ({{ workspace.shortName }})
+      <div class="sub header">
+        {{ workspace.category }}
+      </div>
+      <div class="inline field">
+        <div class="ui toggle checkbox">
+          <input
+            type="checkbox"
+            tabindex="0"
+            [checked]="workspace.isDefault"
+            [disabled]="workspace.isDefault"
+            (onchange)="toggleDefault()"
+          />
+          <label>Default</label>
+        </div>
+      </div>
     </div>
-  </div>
-</h2>
+  </h2>
+  <h3 class="ui right floated header">
+    <a class="ui label"><i class="edit icon"></i>Edit</a>
+  </h3>
+</div>
 <div class="ui divider"></div>
 
 <ng-template [ngIf]="boards.length >= 1" [ngIfElse]="placeholder">

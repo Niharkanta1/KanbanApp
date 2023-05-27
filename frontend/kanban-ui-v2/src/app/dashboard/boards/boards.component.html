@@ -3,26 +3,37 @@
 <div class="ui grid">
   <div class="left floated nine wide column">
     <!-- Sort By -->
-    <div class="ui selection dropdown">
+    <div
+      class="ui selection dropdown"
+      (click)="sortByToggle = !sortByToggle"
+      [ngClass]="sortByToggle ? 'active visible' : ''"
+    >
       <!-- active visible -->
       <input type="hidden" name="sortBy" />
       <i class="dropdown icon"></i>
       <div class="default text">Sort By</div>
-      <div class="menu">
+      <!-- this field need to be updated -->
+      <div class="menu" [ngClass]="sortByToggle ? 'transition visible' : ''">
         <!-- transition visible -->
-        <div class="item" data-value="1">Most recent</div>
-        <div class="item" data-value="0">Alphabetically A-Z</div>
-        <div class="item" data-value="0">Alphabetically Z-A</div>
+        <!-- active selected # required for options -->
+        <div class="item" data-value="0">Most recent</div>
+        <div class="item" data-value="1">Alphabetically A-Z</div>
+        <div class="item" data-value="2">Alphabetically Z-A</div>
       </div>
     </div>
 
     <!-- Filter By -->
-    <div class="ui selection dropdown" style="margin-left: 10px">
+    <div
+      class="ui selection dropdown"
+      [ngClass]="filterByToggle ? 'active visible' : ''"
+      style="margin-left: 10px"
+      (click)="filterByToggle = !filterByToggle"
+    >
       <!-- active visible -->
       <input type="hidden" name="filterBy" />
       <i class="dropdown icon"></i>
       <div class="default text">Filter By</div>
-      <div class="menu">
+      <div class="menu" [ngClass]="filterByToggle ? 'transition visible' : ''">
         <!-- transition visible -->
         <div class="item" data-value="1">Favorite</div>
       </div>
