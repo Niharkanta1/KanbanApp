@@ -48,6 +48,7 @@ public class WorkspaceResource {
 				.created(new URI("/api/workspaces/" + result.getId()))
 				.headers(HeaderUtils.createEntityCreationAlert(APP_NAME, false, ENTITY_NAME, result.getId().toString()))
 				.body(result);
+
 	}
 
 	@PutMapping("/workspaces/{id}")

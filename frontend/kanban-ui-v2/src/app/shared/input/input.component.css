@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.inputLabel {
+  text-align: left;
+}
+
+.inputLabel::after {
+  content: ':';
+}

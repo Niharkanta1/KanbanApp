@@ -1,0 +1,45 @@
+<div class="field">
+  <label class="inputLabel">{{ label }}</label>
+  <div class="ui left icon input" *ngIf="hasIcon">
+    <input
+      *ngIf="controlType === 'input'"
+      [type]="inputType"
+      [formControl]="control"
+      [placeholder]="placeholder"
+    />
+    <i [class]="iconClass"></i>
+  </div>
+  <div *ngIf="!hasIcon">
+    <input
+      *ngIf="controlType === 'input'"
+      [type]="inputType"
+      [formControl]="control"
+      [placeholder]="placeholder"
+    />
+    <textarea
+      *ngIf="controlType === 'textarea'"
+      [formControl]="control"
+    ></textarea>
+  </div>
+  <div *ngIf="showErrors()" class="ui pointing red basic label">
+    <p *ngIf="control.errors?.['required']">Value is required</p>
+    <p *ngIf="control.errors?.['email']">Enter a valid email</p>
+    <p *ngIf="control.errors?.['minlength']">
+      Value you entered is
+      {{ control.errors?.['minlength'].actualLength }} characters long, but it
+      must be at least
+      {{ control.errors?.['minlength'].requiredLength }} characters.
+    </p>
+    <p *ngIf="control.errors?.['maxlength']">
+      Value you entered is
+      {{ control.errors?.['maxlength'].actualLength }} characters long, but it
+      must not be longer than
+      {{ control.errors?.['maxlength'].requiredLength }} characters.
+    </p>
+    <p *ngIf="control.errors?.['pattern']">Invalid format.</p>
+    <p *ngIf="control.errors?.['nonUniqueUsername']">Username is taken</p>
+    <p *ngIf="control.errors?.['noConnection']">
+      Something went wrong. Please check your internet connection.
+    </p>
+  </div>
+</div>
