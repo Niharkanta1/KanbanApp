@@ -8,6 +8,8 @@ This is created for personal use and learning purposes. Never intended for comme
 Updating soon....
 The project is still in Work-in-Progress. 
 
+Backend is designed with JAVA Springboot using SpringREST. And the Frontend is created with AngularJS. 
+Database : Postgres or H2 for Dev environemt.
 
 ## Development
 
@@ -16,7 +18,7 @@ Updating soon....
 Few Screenshots:
 
 Work Completed:
-1. Login/Logout
+1. Login/Logout using JWT Token
 2. Entities and Mappings for Different component.
 3. Basic UI side validations in place
 4. Crud Operations for some Components.
