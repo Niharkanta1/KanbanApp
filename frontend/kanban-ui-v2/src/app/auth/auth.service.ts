@@ -28,7 +28,13 @@ export class AuthService {
 
   signUp(user: User): Observable<any> {
     user.login = user.username;
-    return this.http.post<User>(this.registerApi, JSON.stringify(user));
+    console.log('On Sign up....', user);
+    return this.http.post<User>(this.registerApi, JSON.stringify(user)).pipe(
+      tap((res) => {
+        this.signedin$.next(AuthStatus.signedIn);
+        this.currentUser = res;
+      })
+    );
   }
 
   signIn(user: Login) {

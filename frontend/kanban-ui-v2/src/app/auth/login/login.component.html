@@ -2,7 +2,7 @@
   <div class="ui middle aligned center aligned grid">
     <div class="nine wide column">
       <h2 class="ui image header">
-        <img src="assets/images/logo.png" class="image" />
+        <img src="assets/images/Logo_Circle.png" class="image" />
         <div class="content">Log-in to Kanban</div>
       </h2>
       <form class="ui form" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
@@ -38,41 +38,11 @@
         <i class="ban icon"></i>
         <div class="content" *ngIf="loginForm.errors?.['credentials']">
           <div class="header">Login failed!</div>
-          <p>You might have misspelled your username or password!</p>
+          <p>Incorrect username or password!</p>
         </div>
       </div>
 
-      <div class="ui message">New to us? <a href="#">Sign Up</a></div>
+      <div class="ui message">New to us? <a href="signup">Sign Up</a></div>
     </div>
   </div>
 </div>
-<!--
-
-<div class="page-login">
-  <div class="ui centered grid container">
-    <div class="nine wide column">
-
-      <div class="ui fluid card">
-        <div class="content">
-        <form class="ui form" method="POST">
-          <div class="field">
-            <label>User</label>
-            <input type="text" name="user" placeholder="Username or Email">
-          </div>
-          <div class="field">
-            <label>Password</label>
-            <input class="ui labeled icon" type="password" name="pass" placeholder="Password">
-          </div>
-          <button class="ui primary labeled icon button" type="submit">
-            <i class="unlock alternate icon"></i>
-            Login
-          </button>
-        </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
- -->

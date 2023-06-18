@@ -1,1 +1,90 @@
-<p>registration works!</p>
+<div class="page-login">
+  <div class="ui middle aligned center aligned grid">
+    <div class="nine wide column">
+      <h2 class="ui image header">
+        <img src="assets/images/Logo_Circle.png" class="image" />
+        <div class="content">Register to Kanban</div>
+      </h2>
+      <form class="ui form" (ngSubmit)="onSubmit()" [formGroup]="signupForm">
+        <div class="ui stacked segment">
+          <app-input
+            inputType="text"
+            label="First Name"
+            [control]="signupForm.controls['firstName'] | cast"
+            placeholder="First Name"
+          ></app-input>
+          <app-input
+            inputType="text"
+            label="Last Name"
+            [control]="signupForm.controls['lastName'] | cast"
+            placeholder="Last Name"
+          ></app-input>
+          <app-input
+            inputType="text"
+            label="User Name"
+            [control]="signupForm.controls['username'] | cast"
+            placeholder="User Name"
+          ></app-input>
+          <app-input
+            inputType="password"
+            label="Password"
+            [control]="signupForm.controls['password'] | cast"
+            placeholder="Password"
+          ></app-input>
+          <app-input
+            inputType="password"
+            label="Confirm Password"
+            [control]="signupForm.controls['password2'] | cast"
+            placeholder="Confirm Password"
+          ></app-input>
+          <app-input
+            inputType="email"
+            label="Email"
+            [control]="signupForm.controls['email'] | cast"
+            placeholder="Email"
+          ></app-input>
+          <app-input
+            inputType="text"
+            label="Phone Number"
+            [control]="signupForm.controls['phoneNumber'] | cast"
+            placeholder="0987654321"
+          ></app-input>
+          <button
+            class="ui primary button"
+            type="submit"
+            [disabled]="this.signupForm.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="ui icon warning message"
+        *ngIf="
+          signupForm.controls['password'].touched &&
+          signupForm.controls['password2'].touched &&
+          signupForm.errors
+        "
+      >
+        <i class="ban icon"></i>
+        <div class="content">
+          <div class="header">Form Errors!</div>
+          <p *ngIf="signupForm.errors?.['passwordsDontMatch']">
+            Password and Password Confirmation must match
+          </p>
+          <p *ngIf="signupForm.errors?.['noConnection']">
+            Could not find a connection to server. Not able to sign up.
+          </p>
+          <p *ngIf="signupForm.errors?.['unknownError']">
+            Unknown error occurred. Please try again.
+          </p>
+        </div>
+      </div>
+
+      <div class="ui message">
+        Already have an account? <a href="">Sign In</a>
+      </div>
+    </div>
+  </div>
+</div>
