@@ -40,15 +40,19 @@ export class LoginComponent implements OnInit {
     this.authService.removeToken();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authService.isLoggedIn) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
 
   onSubmit() {
     console.log('On Submit...');
     if (this.loginForm.invalid) return;
     this.authService.signIn(this.loginForm.value).subscribe({
       next: () => {
-        // Navigate to Home Screen
         console.log('Navigating...');
+        this.router.navigateByUrl('/dashboard');
       },
       error: ({ error }) => {
         this.loginForm.setErrors({ credentials: true });

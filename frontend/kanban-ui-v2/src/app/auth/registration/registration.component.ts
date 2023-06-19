@@ -64,7 +64,7 @@ export class RegistrationComponent implements OnInit {
 
     this.authService.signUp(this.signupForm.value as User).subscribe({
       next: (response) => {
-        //this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/dashboard');
         console.log('navigating to homepage');
       },
       error: (err) => {

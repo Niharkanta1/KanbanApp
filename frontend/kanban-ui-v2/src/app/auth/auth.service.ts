@@ -67,6 +67,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
+    console.log(authToken);
     return authToken !== null ? true : false;
   }
 
@@ -75,14 +76,16 @@ export class AuthService {
     localStorage.removeItem('isLoggedIn');
   }
 
-  doLogout() {
+  doLogout(): boolean {
     let removeToken = localStorage.removeItem('access_token');
     if (removeToken == null) {
       localStorage.setItem('isLoggedIn', 'false');
-      this.router.navigate(['welcome']);
+    } else {
+      return false;
     }
-    this.signedin$.next(2);
+    this.signedin$.next(AuthStatus.signedOut);
     console.log('Logout successful');
+    return true;
   }
 
   handleError(error: any) {
