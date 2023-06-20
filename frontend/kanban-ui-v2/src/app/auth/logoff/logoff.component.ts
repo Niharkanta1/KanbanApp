@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'src/app/notifications/notifications.service';
 
 @Component({
   selector: 'app-logoff',
@@ -8,14 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./logoff.component.css'],
 })
 export class LogoffComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationsService
+  ) {}
 
   ngOnInit(): void {
     if (this.authService.doLogout()) {
       setTimeout(() => {
+        this.notificationService.addSuccess('Logout Successful');
         this.router.navigateByUrl('/');
       }, 1000);
     } else {
+      this.notificationService.addError('Login Failed');
       this.router.navigateByUrl('/dashboard');
     }
   }

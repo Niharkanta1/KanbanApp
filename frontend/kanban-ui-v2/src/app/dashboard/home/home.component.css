@@ -2,3 +2,8 @@
   display: block;
   margin-top: 50px;
 }
+
+.zIndex10 {
+  padding-top: 52px;
+  z-index: 10;
+}

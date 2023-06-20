@@ -1,0 +1,9 @@
+<div
+  *ngFor="let message of messages | async"
+  class="ui message"
+  [ngClass]="message.type === 'error' ? 'negative' : 'success'"
+>
+  <div class="header">{{ message.text }}</div>
+
+  <i class="close icon" (click)="clearMessage(message.id)"></i>
+</div>

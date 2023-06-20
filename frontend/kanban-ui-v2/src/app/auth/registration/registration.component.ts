@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { PasswordMatchValidator } from 'src/app/shared/validator/password-match.validator';
 import { User } from 'src/app/shared/model/User';
 import { MatchPassword } from 'src/app/shared/validator/match-password';
+import { NotificationsService } from 'src/app/notifications/notifications.service';
 
 @Component({
   selector: 'app-registration',
@@ -27,7 +28,8 @@ export class RegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private matchPassword: MatchPassword,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationsService
   ) {
     this.signupForm = this.formBuilder.group(
       {
@@ -65,12 +67,14 @@ export class RegistrationComponent implements OnInit {
     this.authService.signUp(this.signupForm.value as User).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/dashboard');
-        console.log('navigating to homepage');
+        this.notificationService.addSuccess('Registration successful!');
       },
       error: (err) => {
         if (err.status === 0) {
+          this.notificationService.addError('Connection error!');
           this.signupForm.setErrors({ noConnection: true });
         } else {
+          this.notificationService.addError('Unknown error occurred!');
           this.signupForm.setErrors({ unknownError: true });
         }
       },

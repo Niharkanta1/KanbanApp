@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'src/app/notifications/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -19,9 +20,10 @@ export class LoginComponent implements OnInit {
   errorMessage: string | undefined;
 
   constructor(
-    public formBuilder: FormBuilder,
-    public authService: AuthService,
-    public router: Router
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationsService
   ) {
     this.loginForm = this.formBuilder.group({
       login: new FormControl('', [
@@ -47,15 +49,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('On Submit...');
     if (this.loginForm.invalid) return;
     this.authService.signIn(this.loginForm.value).subscribe({
       next: () => {
-        console.log('Navigating...');
+        this.notificationService.addSuccess('Login successful');
         this.router.navigateByUrl('/dashboard');
       },
       error: ({ error }) => {
         this.loginForm.setErrors({ credentials: true });
+        this.notificationService.addError('Login Failed');
       },
     });
   }
