@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotificationsModule } from './notifications/notifications.module';
+import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,9 @@ import { NotificationsModule } from './notifications/notifications.module';
     SharedModule,
     NotificationsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

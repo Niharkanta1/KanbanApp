@@ -14,7 +14,11 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.authService.signedin$.subscribe((result) => {
-      this.signedin = result === 1 ? true : false;
+      if (this.authService.isLoggedIn) {
+        this.signedin = true;
+      } else {
+        this.signedin = result === 1 ? true : false;
+      }
     });
   }
 }

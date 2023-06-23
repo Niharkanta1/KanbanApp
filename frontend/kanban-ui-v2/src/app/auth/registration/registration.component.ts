@@ -8,7 +8,6 @@ import {
 import { ErrorResponse } from 'src/app/shared/model/ErrorResponse';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { PasswordMatchValidator } from 'src/app/shared/validator/password-match.validator';
 import { User } from 'src/app/shared/model/User';
 import { MatchPassword } from 'src/app/shared/validator/match-password';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
@@ -66,7 +65,7 @@ export class RegistrationComponent implements OnInit {
 
     this.authService.signUp(this.signupForm.value as User).subscribe({
       next: (response) => {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/');
         this.notificationService.addSuccess('Registration successful!');
       },
       error: (err) => {

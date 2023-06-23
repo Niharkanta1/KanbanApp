@@ -44,13 +44,13 @@ public class TokenProvider {
 
 	public TokenProvider(@Value("${jwt.secret}") String secret,
 	                     @Value("${jwt.base64.secret}") String base64Secret,
-	                     @Value("${jwt.token.validity}") Long validity,
-	                     @Value("${jwt.token.validity.remember.me}") Long rememberMe) {
+	                     @Value("${jwt.token.validity.seconds}") Long validity,
+	                     @Value("${jwt.token.validity.seconds.remember.me}") Long rememberMe) {
 		byte[] keyBytes;
 		this.secret = secret;
 		this.base64Secret = base64Secret;
-		this.tokenValidityInMilliseconds = validity;
-		this.tokenValidityInMillisecondsForRememberMe = rememberMe;
+		this.tokenValidityInMilliseconds = validity * 1000;
+		this.tokenValidityInMillisecondsForRememberMe = rememberMe * 1000;
 		if (!isEmpty(base64Secret)) {
 			log.debug("Using a Base64-encoded JWT secret key");
 			keyBytes = Decoders.BASE64.decode(base64Secret);

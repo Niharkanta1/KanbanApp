@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Login } from '../shared/model/Login';
 import { AuthStatus } from '../shared/model/AuthStatus';
 import { LoginResponse } from '../shared/model/LoginResponse';
+import { JwtHelper } from '../shared/util/jwt-helper';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,11 @@ export class AuthService {
   errorMessage: string = '';
   signedin$ = new BehaviorSubject<number>(0);
 
-  constructor(private http: HttpClient, public router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private jwt: JwtHelper
+  ) {}
 
   signUp(user: User): Observable<any> {
     user.login = user.username;
@@ -43,7 +48,7 @@ export class AuthService {
         this.signedin$.next(AuthStatus.signedIn);
         localStorage.setItem('access_token', res.token);
         localStorage.setItem('isLoggedIn', 'true');
-        //this.currentUser = res;
+        this.getUserFromToke(res.token);
         console.log('Login Successful...', res);
       })
     );
@@ -59,6 +64,20 @@ export class AuthService {
     console.log(err.error);
     console.log(this.errorMessage);
     this.isLoginFailed = true;
+  }
+
+  getUserFromToke(token: string) {
+    const { sub, Email, FullName, Roles, userId, exp } =
+      this.jwt.decodeToken(token);
+    if (!this.currentUser) this.currentUser = {} as User;
+    this.currentUser.fullName = FullName;
+    this.currentUser.id = userId;
+    this.currentUser.email = Email;
+    this.currentUser.authorities = [Roles];
+    this.currentUser.username = sub;
+    this.currentUser.login = sub;
+    console.log('Current user:', this.currentUser);
+    console.log('JWT Expired: ', this.jwt.checkExpirationTime(exp));
   }
 
   getToken() {
