@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { AuthStatus } from './shared/model/AuthStatus';
+import { CommonService } from './shared/service/common.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,13 @@ import { AuthStatus } from './shared/model/AuthStatus';
 export class AppComponent {
   title = 'Kanban UI ver 2.0';
   signedin = false;
-  constructor(private authService: AuthService) {}
+  show = false;
+  menuButtonPressed = false;
+  constructor(
+    private authService: AuthService,
+    private cdRef: ChangeDetectorRef,
+    private commService: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.authService.signedin$.subscribe((result) => {
@@ -19,6 +26,23 @@ export class AppComponent {
       } else {
         this.signedin = result === 1 ? true : false;
       }
+      console.log('Signedin::', this.signedin);
     });
+  }
+
+  // ngIf - Expression has changed after it was checked - Issue Fix
+  ngAfterViewChecked() {
+    let show = this.signedin;
+    if (show != this.show) {
+      // check if it change, tell CD update view
+      this.show = show;
+      this.cdRef.detectChanges();
+    }
+  }
+
+  onMenuButtonClick() {
+    if (!this.signedin) return;
+    this.menuButtonPressed = !this.menuButtonPressed;
+    this.commService.setMenuToggle(this.menuButtonPressed);
   }
 }

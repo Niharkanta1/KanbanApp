@@ -86,7 +86,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
-    console.log(authToken);
+    //console.log(authToken);
     return authToken !== null ? true : false;
   }
 
@@ -96,12 +96,8 @@ export class AuthService {
   }
 
   doLogout(): boolean {
-    let removeToken = localStorage.removeItem('access_token');
-    if (removeToken == null) {
-      localStorage.setItem('isLoggedIn', 'false');
-    } else {
-      return false;
-    }
+    localStorage.removeItem('access_token');
+    localStorage.setItem('isLoggedIn', 'false');
     this.signedin$.next(AuthStatus.signedOut);
     console.log('Logout successful');
     return true;

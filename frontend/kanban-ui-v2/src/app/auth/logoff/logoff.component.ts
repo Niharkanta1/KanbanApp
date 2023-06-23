@@ -17,13 +17,8 @@ export class LogoffComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.doLogout()) {
-      setTimeout(() => {
-        this.notificationService.addSuccess('Logout Successful');
-        this.router.navigateByUrl('/');
-      }, 1000);
-    } else {
-      this.notificationService.addError('Login Failed');
-      this.router.navigateByUrl('/dashboard');
+      this.notificationService.addSuccess('Logout Successful');
+      this.router.navigateByUrl('/');
     }
   }
 }

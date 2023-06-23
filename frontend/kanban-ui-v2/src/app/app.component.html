@@ -3,19 +3,16 @@
     <div class="item">
       <img src="assets/images/Logo.png" alt="logo" class="src" />
     </div>
-    <a routerLink="#" class="item">Kanban App</a>
-    <div class="item labeled icon">
-      <i class="grid layout icon"></i>
+    <div
+      class="item labeled icon"
+      [ngClass]="menuButtonPressed ? 'active' : ''"
+      (click)="onMenuButtonClick()"
+    >
+      <i class="th icon"></i>
     </div>
+    <a routerLink="#" class="item">Kanban App</a>
+
     <div class="right menu">
-      <ng-container *ngIf="signedin">
-        <a routerLink="/dashboard" class="ui item" routerLinkActive="active"
-          >Home</a
-        >
-        <a routerLink="/signout" class="ui item" routerLinkActive="active"
-          >Sign Out</a
-        >
-      </ng-container>
       <ng-container *ngIf="!signedin">
         <a
           routerLink="/"
@@ -26,6 +23,14 @@
         >
         <a routerLink="/signup" class="ui item" routerLinkActive="active"
           >Sign Up</a
+        >
+      </ng-container>
+      <ng-container *ngIf="signedin">
+        <a routerLink="/dashboard" class="ui item" routerLinkActive="active"
+          >Home</a
+        >
+        <a routerLink="/signout" class="ui item" routerLinkActive="active"
+          >Sign Out</a
         >
       </ng-container>
     </div>

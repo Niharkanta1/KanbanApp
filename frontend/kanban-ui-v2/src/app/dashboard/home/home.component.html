@@ -1,7 +1,10 @@
-<div class="ui visible left vertical sidebar menu zIndex10">
-  <a class="item"> <i class="home icon"></i> Home </a>
-  <a class="item"> <i class="block layout icon"></i> Topics </a>
-  <a class="item"> <i class="smile icon"></i> Friends </a>
+<div
+  class="ui left vertical sidebar menu zIndex10"
+  [ngClass]="sidebarVisible ? 'visible' : ''"
+>
+  <a class="item"> <i class="home icon"></i> Workspaces </a>
+  <a class="item"> <i class="block layout icon"></i> Boards </a>
+  <a class="item"> <i class="users icon"></i> Users </a>
   <a class="item"> <i class="calendar icon"></i> History </a>
 </div>
 
