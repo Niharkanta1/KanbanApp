@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Workspace } from '../model/Workspace';
 
 @Injectable({ providedIn: 'root' })
 export class CommonService implements OnInit {
@@ -9,11 +10,13 @@ export class CommonService implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  private menuToggle = new BehaviorSubject<boolean>(false);
+  menuToggle$ = new BehaviorSubject<boolean>(false);
   setMenuToggle(val: boolean) {
-    this.menuToggle.next(val);
+    this.menuToggle$.next(val);
   }
-  getMenuToggle(): Observable<boolean> {
-    return this.menuToggle.asObservable();
+
+  workspaces$ = new BehaviorSubject<Workspace[]>([]);
+  setWorkspaces(workspaces: Workspace[]) {
+    this.workspaces$.next(workspaces);
   }
 }

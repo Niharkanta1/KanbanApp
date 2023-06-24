@@ -11,7 +11,24 @@
       <i class="th icon"></i>
     </div>
     <a routerLink="#" class="item">Kanban App</a>
-
+    <div
+      class="ui pointing dropdown link item"
+      [ngClass]="workspacesSubmenuVisible ? 'active' : ''"
+      (click)="workspacesSubmenuVisible = !workspacesSubmenuVisible"
+      *ngIf="canRenderWorkspacesList()"
+    >
+      <span class="text">Workspaces</span>
+      <i class="dropdown icon"></i>
+      <div
+        class="menu"
+        [ngClass]="workspacesSubmenuVisible ? 'transition visible' : ''"
+      >
+        <div class="item" *ngFor="let item of workspaces">
+          {{ item.name }}
+        </div>
+        <div class="item">Add..</div>
+      </div>
+    </div>
     <div class="right menu">
       <ng-container *ngIf="!signedin">
         <a

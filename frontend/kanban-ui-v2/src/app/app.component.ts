@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { AuthStatus } from './shared/model/AuthStatus';
 import { CommonService } from './shared/service/common.service';
+import { Workspace } from './shared/model/Workspace';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,19 @@ export class AppComponent {
   signedin = false;
   show = false;
   menuButtonPressed = false;
+  workspacesSubmenuVisible = false;
+  workspaces: Workspace[] = [];
+
   constructor(
     private authService: AuthService,
     private cdRef: ChangeDetectorRef,
     private commService: CommonService
-  ) {}
+  ) {
+    commService.workspaces$.subscribe((result) => {
+      this.workspaces = result;
+      console.log('Workspaces in Header::', this.workspaces.length);
+    });
+  }
 
   ngOnInit(): void {
     this.authService.signedin$.subscribe((result) => {
@@ -38,6 +47,10 @@ export class AppComponent {
       this.show = show;
       this.cdRef.detectChanges();
     }
+  }
+
+  canRenderWorkspacesList() {
+    return this.signedin && this.workspaces.length >= 1;
   }
 
   onMenuButtonClick() {
