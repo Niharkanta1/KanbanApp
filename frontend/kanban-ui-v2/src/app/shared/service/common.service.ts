@@ -19,4 +19,9 @@ export class CommonService implements OnInit {
   setWorkspaces(workspaces: Workspace[]) {
     this.workspaces$.next(workspaces);
   }
+
+  selectedWorkspace$ = new BehaviorSubject<Workspace>({} as Workspace);
+  setSelectedWorkspace(workspace: Workspace) {
+    this.selectedWorkspace$.next(workspace);
+  }
 }

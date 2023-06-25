@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
       this.workspaces = workspaces;
       this.selectedWorkspace = this.fetchDefaultWorkspace();
       commService.setWorkspaces(this.workspaces);
+      commService.setSelectedWorkspace(this.selectedWorkspace);
     });
   }
 
