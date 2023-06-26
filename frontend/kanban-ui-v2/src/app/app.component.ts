@@ -16,6 +16,7 @@ export class AppComponent {
   menuButtonPressed = false;
   workspacesSubmenuVisible = false;
   workspaces: Workspace[] = [];
+  selectedWS = {} as Workspace;
 
   constructor(
     private authService: AuthService,
@@ -25,6 +26,9 @@ export class AppComponent {
     commService.workspaces$.subscribe((result) => {
       this.workspaces = result;
       console.log('Workspaces in Header::', this.workspaces.length);
+    });
+    commService.selectedWorkspace$.subscribe((ws) => {
+      this.selectedWS = ws;
     });
   }
 

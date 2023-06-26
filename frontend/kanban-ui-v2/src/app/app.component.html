@@ -23,9 +23,14 @@
         class="menu"
         [ngClass]="workspacesSubmenuVisible ? 'transition visible' : ''"
       >
+        <div class="header">Selected Workspace</div>
+        <div class="item">{{ selectedWS.shortName }}</div>
+        <div class="ui divider"></div>
+        <div class="header">Other Workspaces</div>
         <div class="item" *ngFor="let item of workspaces">
           {{ item.name }}
         </div>
+        <div class="ui divider"></div>
         <div class="item">Add..</div>
       </div>
     </div>
