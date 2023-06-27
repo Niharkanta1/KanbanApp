@@ -9,9 +9,14 @@ import { Board } from 'src/app/shared/model/Board';
 export class BoardsComponent implements OnInit {
   @Input() boards = [] as Board[];
 
-  filterByToggle = false;
-  sortByToggle = false;
+  sortByOptions = [
+    { dataValue: '0', label: 'Most recent' },
+    { dataValue: '1', label: 'Alphabetically A-Z' },
+    { dataValue: '1', label: 'Alphabetically Z-A' },
+  ];
 
+  filterByOptions = [{ dataValue: '0', label: 'Favorite' }];
+  filterByToggle = false;
   constructor() {}
 
   ngOnInit(): void {}

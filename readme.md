@@ -32,17 +32,3 @@ To-Do:
 2. Description Text Area
 3. Trello Like To-Do/Inprogress/Finish List System.
 4. UI Styling and Finishing
-
-Login:
-![image](https://user-images.githubusercontent.com/7473994/166268094-7ddde6e4-f360-49c0-bd52-1a56de491a4e.png)
-
-Dashboard:
-![image](https://user-images.githubusercontent.com/7473994/166268270-4c6fc7df-1c17-487d-a6c7-750a4fa9e26b.png)
-
-Create Boards and Workspace
-![image](https://user-images.githubusercontent.com/7473994/166268330-43f64883-f60a-4cbc-81b3-aa275fe49ea6.png)
-
-![image](https://user-images.githubusercontent.com/7473994/166268372-cb8f9df3-3220-4df7-894e-b23bbe9e0829.png)
-
-Side Bar - WIP
-![image](https://user-images.githubusercontent.com/7473994/166268466-312c9a69-c757-4a0c-8516-6ca5034f61fd.png)

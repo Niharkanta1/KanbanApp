@@ -1,0 +1,24 @@
+<div
+  class="ui selection dropdown"
+  (click)="toggle = !toggle"
+  [ngClass]="toggle ? 'active visible' : ''"
+>
+  <!-- active visible -->
+  <input type="hidden" [name]="inputName" />
+  <i class="dropdown icon"></i>
+  <div class="default text">{{ text }}</div>
+  <!-- this field need to be updated -->
+  <div class="menu" [ngClass]="toggle ? 'transition visible' : ''">
+    <!-- transition visible -->
+    <!-- active selected # required for options -->
+    <div
+      class="item"
+      attr.data-value="{{ item.dataValue }}"
+      *ngFor="let item of options"
+      (click)="selectOption(item)"
+      [ngClass]="item.selected ? 'active selected' : ''"
+    >
+      {{ item.label }}
+    </div>
+  </div>
+</div>
