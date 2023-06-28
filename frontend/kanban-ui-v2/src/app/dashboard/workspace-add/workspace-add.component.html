@@ -1,0 +1,13 @@
+<div [ngSwitch]="buttonType">
+  <div *ngSwitchCase="'navbarDropdownAdd'">
+    <a (click)="showModal = true">{{ action }}</a>
+  </div>
+  <div *ngSwitchCase="'button'">Two</div>
+  <div *ngSwitchDefault>
+    <div class="ui button primary fluid" (click)="showModal = true">Add</div>
+  </div>
+</div>
+
+<app-modal *ngIf="showModal" (dismiss)="showModal = false">
+  <div modalTitle>Add Workspace</div>
+</app-modal>

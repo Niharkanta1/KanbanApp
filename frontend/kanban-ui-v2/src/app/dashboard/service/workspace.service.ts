@@ -13,4 +13,8 @@ export class WorkspaceService {
   getAllWorkspaces() {
     return this.http.get<Workspace[]>(this.workspaceApi);
   }
+
+  createWorkspace(workspace: Workspace) {
+    return this.http.post(this.workspaceApi, workspace);
+  }
 }

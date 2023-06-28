@@ -39,21 +39,13 @@
       <a
         (click)="markFavorite(item, $event)"
         class="right floated star"
-        [ngStyle]="item.isFavorite ? { 'background-color': 'green' } : {}"
+        [ngStyle]="item.isFavorite ? { color: 'gold' } : {}"
       >
         <i class="star icon"></i>
         Favorite
       </a>
     </div>
   </a>
-  <!-- <a class="card">
-    <div class="content">
-      <div class="ui icon header">
-        <i class="add icon"></i>
-        Add Board
-      </div>
-    </div>
-  </a> -->
   <a class="card">
     <div class="content">
       <div class="header">Add a board</div>

@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotificationsModule } from './notifications/notifications.module';
 import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,9 +21,10 @@ import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
     AuthModule,
     SharedModule,
     NotificationsModule,
+    DashboardModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

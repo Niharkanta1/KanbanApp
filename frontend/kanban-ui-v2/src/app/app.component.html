@@ -31,9 +31,15 @@
           {{ item.name }}
         </div>
         <div class="ui divider"></div>
-        <div class="item">Add..</div>
+        <div class="item">
+          <app-workspace-add
+            buttonType="navbarDropdownAdd"
+            action="Add..."
+          ></app-workspace-add>
+        </div>
       </div>
     </div>
+
     <div class="right menu">
       <ng-container *ngIf="!signedin">
         <a
