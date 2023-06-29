@@ -10,4 +10,8 @@
 
 <app-modal *ngIf="showModal" (dismiss)="showModal = false">
   <div modalTitle>Add Workspace</div>
+  <app-workspace-form
+    [workspace]="workspace"
+    (workspaceSubmit)="createWorkspace($event)"
+  ></app-workspace-form>
 </app-modal>

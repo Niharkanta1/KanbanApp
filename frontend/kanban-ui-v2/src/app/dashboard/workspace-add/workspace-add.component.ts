@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Workspace } from 'src/app/shared/model/Workspace';
 import { WorkspaceService } from '../service/workspace.service';
+import { CommonService } from 'src/app/shared/service/common.service';
+import { NotificationsService } from 'src/app/notifications/notifications.service';
 
 @Component({
   selector: 'app-workspace-add',
@@ -23,13 +25,17 @@ export class WorkspaceAddComponent implements OnInit {
     isDefault: false,
   };
 
-  constructor(private workspaceService: WorkspaceService) {}
+  constructor(
+    private workspaceService: WorkspaceService,
+    private notificationService: NotificationsService
+  ) {}
 
   ngOnInit(): void {}
 
   createWorkspace(workspace: Workspace) {
     this.workspaceService.createWorkspace(workspace).subscribe(() => {
       this.showModal = false;
+      this.notificationService.addSuccess('Workspace created successfully');
     });
   }
 }

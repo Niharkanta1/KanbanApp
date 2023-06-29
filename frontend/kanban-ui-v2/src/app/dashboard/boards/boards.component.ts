@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Board } from 'src/app/shared/model/Board';
+import { CommonService } from 'src/app/shared/service/common.service';
 
 @Component({
   selector: 'app-boards',
@@ -17,12 +19,18 @@ export class BoardsComponent implements OnInit {
 
   filterByOptions = [{ dataValue: '0', label: 'Favorite' }];
   filterByToggle = false;
-  constructor() {}
+  constructor(private commService: CommonService) {}
 
   ngOnInit(): void {}
 
   addNewBoard() {
     console.log('Adding new board....');
+  }
+
+  clearFilter() {
+    console.log('clear filters');
+    this.commService.clearBoardsFilter$.next('sortBy');
+    this.commService.clearBoardsFilter$.next('filterBy');
   }
 
   markFavorite(board: Board, event: Event) {

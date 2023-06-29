@@ -10,3 +10,9 @@
 .inputLabel::after {
   content: ':';
 }
+
+.ui.form textarea {
+  height: 3em;
+  min-height: 3em;
+  max-height: 5em;
+}

@@ -1,1 +1,29 @@
-<p>workspace-form works!</p>
+<form class="ui form" [formGroup]="workspaceForm" (ngSubmit)="onSubmit()">
+  <app-input
+    label="Name"
+    inputType="text"
+    [control]="workspaceForm.controls.name"
+  ></app-input>
+  <app-input
+    label="Description"
+    inputType="text"
+    [control]="workspaceForm.controls.description"
+  ></app-input>
+  <app-input
+    label="Category"
+    inputType="text"
+    [control]="workspaceForm.controls.category"
+  ></app-input>
+  <app-input
+    label="Short Name"
+    inputType="text"
+    [control]="workspaceForm.controls.shortName"
+  ></app-input>
+  <app-input
+    label="Website URL"
+    inputType="text"
+    [control]="workspaceForm.controls.website"
+  ></app-input>
+
+  <button class="ui button primary" type="submit">Submit</button>
+</form>

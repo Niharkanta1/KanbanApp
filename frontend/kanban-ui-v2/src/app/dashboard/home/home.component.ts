@@ -23,11 +23,19 @@ export class HomeComponent implements OnInit {
       this.sidebarVisible = val;
     });
     this.route.data.subscribe(({ workspaces }) => {
-      this.workspaces = workspaces;
-      this.selectedWorkspace = this.fetchDefaultWorkspace();
-      commService.setWorkspaces(this.workspaces);
-      commService.setSelectedWorkspace(this.selectedWorkspace);
+      this.updateWorkspaces(workspaces);
     });
+    this.commService.workspaceCreated$.subscribe((workspaces) =>
+      this.updateWorkspaces(workspaces)
+    );
+  }
+
+  updateWorkspaces(workspaces: Workspace[]) {
+    console.log('in home:', workspaces);
+    this.workspaces = workspaces;
+    this.selectedWorkspace = this.fetchDefaultWorkspace();
+    this.commService.workspaces$.next(this.workspaces);
+    this.commService.selectedWorkspace$.next(this.selectedWorkspace);
   }
 
   ngOnInit(): void {

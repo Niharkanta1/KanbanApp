@@ -118,6 +118,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		defaultWorkspace.setShortName("Default WS");
 		defaultWorkspace.setDateCreated(new Date());
 		defaultWorkspace.setUserCreated(Constants.SYSTEM);
+		defaultWorkspace.setIsDefault(true);
 
 		Board board = new Board();
 		board.setDateCreated(new Date());

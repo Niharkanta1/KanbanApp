@@ -27,7 +27,7 @@ public class Board extends BaseEntity implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_sequence")
-	@SequenceGenerator(name = "board_sequence")
+	@SequenceGenerator(name = "board_sequence", initialValue = 1000)
 	@Column(name = "id", nullable = false)
 	private Long id;
 
@@ -42,7 +42,7 @@ public class Board extends BaseEntity implements Serializable {
 	@Column(name = "is_favorite")
 	private Boolean isFavorite;
 
-	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "cards", "board" }, allowSetters = true)
 	private Set<StageList> stageLists = new HashSet<>();
 
