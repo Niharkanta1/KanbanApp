@@ -27,7 +27,7 @@ public class StageList extends BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stage_sequence")
-	@SequenceGenerator(name = "stage_sequence")
+	@SequenceGenerator(name = "stage_sequence", initialValue = 1000)
 	@Column(name = "id", nullable = false)
 	private Long id;
 
@@ -42,7 +42,7 @@ public class StageList extends BaseEntity implements Serializable {
 	@Column(name = "is_watching")
 	private Boolean isWatching;
 
-	@OneToMany(mappedBy = "stageList", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "stageList", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "checkLists", "attachments", "labels", "members", "stageList" }, allowSetters = true)
 	private Set<Card> cards = new HashSet<>();
 

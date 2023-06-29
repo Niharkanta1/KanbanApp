@@ -27,7 +27,7 @@ public class Workspace extends BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "workspace_sequence")
-	@SequenceGenerator(name = "workspace_sequence")
+	@SequenceGenerator(name = "workspace_sequence", initialValue = 1000)
 	@Column(name = "id", nullable = false)
 	private Long id;
 
@@ -48,10 +48,10 @@ public class Workspace extends BaseEntity implements Serializable {
 	@Column(name = "website")
 	private String website;
 
-	@Column(name = "default")
+	@Column(name = "is_default")
 	private Boolean isDefault;
 
-	@OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "workspace", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "stageLists", "workspace" }, allowSetters = true)
 	private Set<Board> boards = new HashSet<>();
 

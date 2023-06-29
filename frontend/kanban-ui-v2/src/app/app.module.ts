@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NotificationsModule } from './notifications/notifications.module';
 import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -17,10 +16,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
     AuthModule,
     SharedModule,
-    NotificationsModule,
     DashboardModule,
   ],
   providers: [

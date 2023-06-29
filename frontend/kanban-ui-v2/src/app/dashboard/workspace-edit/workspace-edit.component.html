@@ -1,1 +1,9 @@
-<p>workspace-edit works!</p>
+<a class="ui label" (click)="showModal = true"><i class="edit icon"></i>Edit</a>
+
+<app-modal *ngIf="showModal" (dismiss)="showModal = false">
+  <div modalTitle>Edit Workspace</div>
+  <app-workspace-form
+    [workspace]="workspace"
+    (workspaceSubmit)="updateWorkspace($event)"
+  ></app-workspace-form>
+</app-modal>

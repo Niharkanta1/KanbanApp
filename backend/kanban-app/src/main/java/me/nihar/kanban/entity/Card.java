@@ -27,7 +27,7 @@ public class Card extends BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_sequence")
-	@SequenceGenerator(name = "card_sequence")
+	@SequenceGenerator(name = "card_sequence", initialValue = 10000)
 	@Column(name = "id", nullable = false)
 	private Long id;
 

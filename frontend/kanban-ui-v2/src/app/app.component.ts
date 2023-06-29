@@ -60,6 +60,6 @@ export class AppComponent {
   onMenuButtonClick() {
     if (!this.signedin) return;
     this.menuButtonPressed = !this.menuButtonPressed;
-    this.commService.setMenuToggle(this.menuButtonPressed);
+    this.commService.menuToggle$.next(this.menuButtonPressed);
   }
 }

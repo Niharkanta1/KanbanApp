@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { CommonService } from '../service/common.service';
 
 interface Option {
   dataValue: string;
@@ -16,15 +18,24 @@ export class DropdownComponent implements OnInit {
   @Input() text = 'Sort By';
   @Input() inputName = 'sortBy';
 
+  defaultName = '';
+
   toggle = false;
 
-  constructor() {
-    this.options.push({ dataValue: '0', label: 'Most recent' });
-    this.options.push({ dataValue: '1', label: 'Alphabetically A-Z' });
-    this.options.push({ dataValue: '2', label: 'Alphabetically Z-A' });
+  constructor(private commService: CommonService) {}
+
+  ngOnInit(): void {
+    this.commService.clearBoardsFilter$.subscribe((value) => {
+      this.clearFields(value);
+    });
+    this.defaultName = this.text;
   }
 
-  ngOnInit(): void {}
+  clearFields(value: string) {
+    if (this.inputName === value) {
+      this.unselectAllOptions();
+    }
+  }
 
   selectOption(item: Option) {
     this.unselectAllOptions();
@@ -33,7 +44,13 @@ export class DropdownComponent implements OnInit {
   }
 
   unselectAllOptions() {
+    console.log('clear dropdown');
     if (this.options.length <= 0) return;
-    this.options.forEach((item) => (item.selected = false));
+    this.options.forEach((item) => {
+      item.selected = false;
+    });
+    this.text = this.defaultName;
   }
+
+  ngOnDestroy() {}
 }

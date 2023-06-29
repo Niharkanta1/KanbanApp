@@ -17,4 +17,8 @@ export class WorkspaceService {
   createWorkspace(workspace: Workspace) {
     return this.http.post(this.workspaceApi, workspace);
   }
+
+  updateWorkspace(workspace: Workspace) {
+    return this.http.patch(`${this.workspaceApi}/${workspace.id}`, workspace);
+  }
 }

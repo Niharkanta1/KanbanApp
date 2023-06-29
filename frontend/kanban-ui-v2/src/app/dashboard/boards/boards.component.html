@@ -3,16 +3,19 @@
 <div class="ui grid">
   <div class="left floated nine wide column">
     <app-dropdown
-      inputName="Sort By"
+      inputName="sortBy"
       text="Sort By"
       [options]="sortByOptions"
     ></app-dropdown>
     <app-dropdown
       style="margin-left: 10px"
-      inputName="Filter By"
+      inputName="filterBy"
       text="Filter By"
       [options]="filterByOptions"
     ></app-dropdown>
+    <button style="margin-left: 10px" class="ui button" (click)="clearFilter()">
+      Clear Filter
+    </button>
   </div>
   <div class="right floated five wide column">
     <!-- Search -->
@@ -24,7 +27,7 @@
 </div>
 
 <!-- Board Cards -->
-<div class="ui four cards">
+<div class="ui four cards" style="padding-top: 20px">
   <a class="card" *ngFor="let item of boards">
     <div class="content">
       <div class="header">{{ item.name }}</div>
