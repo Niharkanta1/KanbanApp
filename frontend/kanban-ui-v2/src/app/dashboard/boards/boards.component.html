@@ -31,14 +31,10 @@
   <a class="card" *ngFor="let item of boards">
     <div class="content">
       <div class="header">{{ item.name }}</div>
-      <div class="meta">{{ item.isFavorite }}</div>
       <div class="description">{{ item.description }}</div>
     </div>
     <div class="extra content">
-      <a class="left floated like" (click)="editBoard(item, $event)">
-        <i class="pencil alternate icon"></i>
-        Edit
-      </a>
+      <app-boards-edit [board]="item" [workspace]="workspace"></app-boards-edit>
       <a
         (click)="markFavorite(item, $event)"
         class="right floated star"
@@ -56,10 +52,7 @@
         Want to add another board? Create board here...
       </div>
     </div>
-    <div class="ui bottom attached button" (click)="addNewBoard()">
-      <i class="add icon"></i>
-      Add Board
-    </div>
+    <app-boards-add [workspace]="workspace"></app-boards-add>
   </a>
 </div>
 <!-- End-->

@@ -1,0 +1,11 @@
+<a class="left floated like" (click)="showModal = true">
+  <i class="pencil alternate icon"></i>
+  Edit
+</a>
+<app-modal *ngIf="showModal" (dismiss)="showModal = false">
+  <div modalTitle>Edit Board</div>
+  <app-boards-form
+    [board]="board"
+    (boardSubmit)="updateBoard($event)"
+  ></app-boards-form>
+</app-modal>

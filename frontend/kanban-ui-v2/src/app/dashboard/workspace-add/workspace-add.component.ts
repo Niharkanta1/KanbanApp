@@ -27,15 +27,19 @@ export class WorkspaceAddComponent implements OnInit {
 
   constructor(
     private workspaceService: WorkspaceService,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private commService: CommonService
   ) {}
 
   ngOnInit(): void {}
 
   createWorkspace(workspace: Workspace) {
-    this.workspaceService.createWorkspace(workspace).subscribe(() => {
+    this.workspaceService.createWorkspace(workspace).subscribe((res) => {
       this.showModal = false;
       this.notificationService.addSuccess('Workspace created successfully');
+      this.workspaceService.getAllWorkspaces().subscribe((res) => {
+        this.commService.workspaces$.next(res);
+      });
     });
   }
 }

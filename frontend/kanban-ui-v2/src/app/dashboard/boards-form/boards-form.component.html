@@ -1,0 +1,13 @@
+<form class="ui form" [formGroup]="boardForm" (ngSubmit)="onSubmit()">
+  <app-input
+    label="Name"
+    inputType="text"
+    [control]="boardForm.controls.name"
+  ></app-input>
+  <app-input
+    label="Description"
+    inputType="text"
+    [control]="boardForm.controls.description"
+  ></app-input>
+  <button class="ui button primary" type="submit">Submit</button>
+</form>

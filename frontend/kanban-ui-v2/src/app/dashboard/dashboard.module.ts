@@ -11,6 +11,9 @@ import { WorkspaceAddComponent } from './workspace-add/workspace-add.component';
 import { WorkspaceEditComponent } from './workspace-edit/workspace-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotificationsModule } from '../notifications/notifications.module';
+import { BoardsAddComponent } from './boards-add/boards-add.component';
+import { BoardsEditComponent } from './boards-edit/boards-edit.component';
+import { BoardsFormComponent } from './boards-form/boards-form.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { NotificationsModule } from '../notifications/notifications.module';
     WorkspaceFormComponent,
     WorkspaceAddComponent,
     WorkspaceEditComponent,
+    BoardsAddComponent,
+    BoardsEditComponent,
+    BoardsFormComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule],
   exports: [WorkspaceAddComponent, WorkspaceFormComponent],

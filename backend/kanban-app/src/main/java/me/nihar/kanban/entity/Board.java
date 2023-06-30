@@ -42,6 +42,9 @@ public class Board extends BaseEntity implements Serializable {
 	@Column(name = "is_favorite")
 	private Boolean isFavorite;
 
+	@Column(name = "is_closed")
+	private Boolean isClosed;
+
 	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "cards", "board" }, allowSetters = true)
 	private Set<StageList> stageLists = new HashSet<>();

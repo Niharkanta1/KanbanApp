@@ -1,0 +1,25 @@
+<div [ngSwitch]="buttonType">
+  <div
+    *ngSwitchCase="'placeholder'"
+    class="ui primary button"
+    (click)="showModal = true"
+  >
+    Create Board
+  </div>
+  <div
+    *ngSwitchDefault
+    class="ui bottom attached button"
+    (click)="showModal = true"
+  >
+    <i class="add icon"></i>
+    Add Board
+  </div>
+</div>
+
+<app-modal *ngIf="showModal" (dismiss)="showModal = false">
+  <div modalTitle>Add Board</div>
+  <app-boards-form
+    [board]="board"
+    (boardSubmit)="createBoard($event)"
+  ></app-boards-form>
+</app-modal>

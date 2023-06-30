@@ -15,10 +15,13 @@ export class WorkspaceService {
   }
 
   createWorkspace(workspace: Workspace) {
-    return this.http.post(this.workspaceApi, workspace);
+    return this.http.post<Workspace>(this.workspaceApi, workspace);
   }
 
   updateWorkspace(workspace: Workspace) {
-    return this.http.patch(`${this.workspaceApi}/${workspace.id}`, workspace);
+    return this.http.patch<Workspace>(
+      `${this.workspaceApi}/${workspace.id}`,
+      workspace
+    );
   }
 }

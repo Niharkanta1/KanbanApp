@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Board } from 'src/app/shared/model/Board';
+import { Workspace } from 'src/app/shared/model/Workspace';
 import { CommonService } from 'src/app/shared/service/common.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { CommonService } from 'src/app/shared/service/common.service';
 })
 export class BoardsComponent implements OnInit {
   @Input() boards = [] as Board[];
+  @Input() workspace!: Workspace;
 
   sortByOptions = [
     { dataValue: '0', label: 'Most recent' },
@@ -21,16 +23,24 @@ export class BoardsComponent implements OnInit {
   filterByToggle = false;
   constructor(private commService: CommonService) {}
 
-  ngOnInit(): void {}
-
-  addNewBoard() {
-    console.log('Adding new board....');
+  ngOnInit(): void {
+    this.commService.onBoardAdd$.subscribe((result) => (this.boards = result));
+    this.commService.onBoardEdit$.subscribe((res) => this.replaceBoard(res));
   }
 
   clearFilter() {
     console.log('clear filters');
     this.commService.clearBoardsFilter$.next('sortBy');
     this.commService.clearBoardsFilter$.next('filterBy');
+  }
+
+  replaceBoard(res: Board): void {
+    for (let index = 0; index < this.boards.length; index++) {
+      if (this.boards[index].id === res.id) {
+        this.boards[index] = res;
+        break;
+      }
+    }
   }
 
   markFavorite(board: Board, event: Event) {

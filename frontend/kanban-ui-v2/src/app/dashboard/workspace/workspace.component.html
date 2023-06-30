@@ -36,7 +36,7 @@
 <div class="ui divider"></div>
 
 <ng-template [ngIf]="boards.length >= 1" [ngIfElse]="placeholder">
-  <app-boards [boards]="boards"></app-boards>
+  <app-boards [boards]="boards" [workspace]="workspace"></app-boards>
 </ng-template>
 
 <ng-template #placeholder>
@@ -45,6 +45,9 @@
       <i class="file alternate outline icon"></i>
       No boards are listed for this workspace.
     </div>
-    <div class="ui primary button">Create Board</div>
+    <app-boards-add
+      buttonType="placeholder"
+      [workspace]="workspace"
+    ></app-boards-add>
   </div>
 </ng-template>
