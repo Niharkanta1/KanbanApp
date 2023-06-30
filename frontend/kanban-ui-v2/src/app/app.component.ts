@@ -62,4 +62,8 @@ export class AppComponent {
     this.menuButtonPressed = !this.menuButtonPressed;
     this.commService.menuToggle$.next(this.menuButtonPressed);
   }
+
+  selectWorkspace(item: Workspace) {
+    this.commService.selectedWorkspace$.next(item);
+  }
 }

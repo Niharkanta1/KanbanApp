@@ -24,10 +24,17 @@
         [ngClass]="workspacesSubmenuVisible ? 'transition visible' : ''"
       >
         <div class="header">Selected Workspace</div>
-        <div class="item">{{ selectedWS.shortName }}</div>
+        <div class="item active">
+          {{ selectedWS.name }}({{ selectedWS.shortName }})
+        </div>
         <div class="ui divider"></div>
         <div class="header">Other Workspaces</div>
-        <div class="item" *ngFor="let item of workspaces">
+        <div
+          class="item"
+          *ngFor="let item of workspaces"
+          [ngClass]="item.id === selectedWS.id ? 'active' : ''"
+          (click) = "selectWorkspace(item)"
+        >
           {{ item.name }}
         </div>
         <div class="ui divider"></div>

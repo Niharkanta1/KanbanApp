@@ -11,14 +11,19 @@ import { CommonService } from 'src/app/shared/service/common.service';
 export class WorkspaceComponent implements OnInit {
   workspace = {} as Workspace;
   boards = [] as Board[];
-  constructor(commService: CommonService) {
+  constructor(private commService: CommonService) {
     commService.selectedWorkspace$.subscribe((ws) => {
       this.workspace = ws;
       this.boards = ws.boards;
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.commService.onBoardAdd$.subscribe((res) => {
+      this.boards = res;
+      this.workspace.boards = this.boards;
+    });
+  }
 
   getInitials(nameString: string) {
     const fullName: string[] = nameString.split(' ');
