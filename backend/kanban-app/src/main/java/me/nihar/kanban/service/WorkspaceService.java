@@ -21,4 +21,6 @@ public interface WorkspaceService {
 	Optional<Workspace> findOneForCurrentUser(Long id);
 	void delete(Long id);
 	void createDefaultWorkspace(User user);
+
+	Optional<Workspace> updateDefault(Long id);
 }

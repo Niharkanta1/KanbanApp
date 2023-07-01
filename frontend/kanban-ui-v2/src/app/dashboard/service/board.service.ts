@@ -25,4 +25,8 @@ export class BoardService {
   updateBoard(board: Board) {
     return this.http.patch<Board>(`${this.boardApi}/${board.id}`, board);
   }
+
+  toggleFavorite(id: number) {
+    return this.http.put<Board>(`${this.boardApi}/${id}/toggle-favorite`, {});
+  }
 }

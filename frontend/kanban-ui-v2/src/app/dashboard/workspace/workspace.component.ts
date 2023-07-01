@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Board } from 'src/app/shared/model/Board';
 import { Workspace } from 'src/app/shared/model/Workspace';
 import { CommonService } from 'src/app/shared/service/common.service';
+import { WorkspaceService } from '../service/workspace.service';
+import { NotificationsService } from 'src/app/notifications/notifications.service';
 
 @Component({
   selector: 'app-workspace',
@@ -11,7 +13,11 @@ import { CommonService } from 'src/app/shared/service/common.service';
 export class WorkspaceComponent implements OnInit {
   workspace = {} as Workspace;
   boards = [] as Board[];
-  constructor(private commService: CommonService) {
+  constructor(
+    private commService: CommonService,
+    private workspaceService: WorkspaceService,
+    private notificationService: NotificationsService
+  ) {
     commService.selectedWorkspace$.subscribe((ws) => {
       this.workspace = ws;
       this.boards = ws.boards;
@@ -31,7 +37,19 @@ export class WorkspaceComponent implements OnInit {
     return initials.toUpperCase();
   }
 
-  toggleDefault() {
-    console.log('Toggle default workspace');
+  makeDefault() {
+    console.log('Making workspace default.');
+    this.workspaceService.makeDefault(this.workspace.id).subscribe(
+      (res) => {
+        this.workspace = res;
+        this.workspaceService.getAllWorkspaces().subscribe((result) => {
+          this.commService.workspaces$.next(result);
+        });
+        this.notificationService.addSuccess('Workspace updated successfully.');
+      },
+      (err) => {
+        this.notificationService.addError('Workspace update failed.');
+      }
+    );
   }
 }

@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static me.nihar.kanban.utils.Constants.APP_NAME;
+import static me.nihar.kanban.utils.Constants.IDNOTFOUND;
 
 /*
  * @created 25-02-2022
@@ -77,6 +78,32 @@ public class BoardResource {
 				.ok()
 				.headers(HeaderUtils.createEntityUpdateAlert(APP_NAME, false, ENTITY_NAME, board.getId().toString()))
 				.body(result);
+	}
+
+	@PutMapping(value = "/boards/{id}/toggle-favorite")
+	public ResponseEntity<Board> toggleFavorite(@PathVariable(value = "id") final Long id) throws Throwable  {
+		log.debug("REST request to toggle favorite Board : {}", id);
+		if (!boardRepository.existsById(id)) {
+			throw new BadRequestAlertException("Entity not found", ENTITY_NAME, IDNOTFOUND);
+		}
+		Optional<Board> result = boardService.toggleFavorite(id);
+		return ResponseUtils.wrapOrNotFound(
+				result,
+				HeaderUtils.createEntityUpdateAlert(APP_NAME, false, ENTITY_NAME, id.toString()),
+				String.format("%s with Id %s is Not found!", ENTITY_NAME, id));
+	}
+
+	@PutMapping(value = "/boards/{id}/close")
+	public ResponseEntity<Board> closeBoard(@PathVariable(value = "id") final Long id) throws Throwable  {
+		log.debug("REST request to close Board : {}", id);
+		if (!boardRepository.existsById(id)) {
+			throw new BadRequestAlertException("Entity not found", ENTITY_NAME, IDNOTFOUND);
+		}
+		Optional<Board> result = boardService.closeBoard(id);
+		return ResponseUtils.wrapOrNotFound(
+				result,
+				HeaderUtils.createEntityUpdateAlert(APP_NAME, false, ENTITY_NAME, id.toString()),
+				String.format("%s with Id %s is Not found!", ENTITY_NAME, id));
 	}
 
 	@PatchMapping(value = "/boards/{id}", consumes = { "application/json", "application/merge-patch+json" })

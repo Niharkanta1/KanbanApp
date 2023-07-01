@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -49,10 +50,11 @@ public class Workspace extends BaseEntity implements Serializable {
 	private String website;
 
 	@Column(name = "is_default")
-	private Boolean isDefault;
+	private Boolean isDefault = false;
 
 	@OneToMany(mappedBy = "workspace", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "stageLists", "workspace" }, allowSetters = true)
+	@Where(clause = "is_closed = false")
 	private Set<Board> boards = new HashSet<>();
 
 	@ManyToOne

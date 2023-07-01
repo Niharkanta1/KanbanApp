@@ -55,10 +55,10 @@ public class Card extends BaseEntity implements Serializable {
 	private Date reminderDate;
 
 	@Column(name = "is_archived")
-	private Boolean isArchived;
+	private Boolean isArchived = false;
 
 	@Column(name = "is_watching")
-	private Boolean isWatching;
+	private Boolean isWatching = false;
 
 /*
 

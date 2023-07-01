@@ -19,4 +19,8 @@ public interface BoardService {
 	Optional<Board> findByIdAndWorkspace(Long id, Workspace workspace);
 	void delete(Long id);
 	Board save(Board board);
+
+    Optional<Board> toggleFavorite(Long id);
+
+	Optional<Board> closeBoard(Long id);
 }

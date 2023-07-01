@@ -15,6 +15,6 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
-	List<Board> findByWorkspaceId(Long workspaceId);
+	List<Board> findByWorkspaceIdAndIsClosed(Long workspaceId, boolean value);
 	Optional<Board> findByIdAndWorkspaceId(Long id, Long workspaceId);
 }

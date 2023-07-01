@@ -74,6 +74,19 @@ public class WorkspaceResource {
 				.body(result);
 	}
 
+	@PutMapping(value = "/workspaces/{id}/make-default")
+	public ResponseEntity<Workspace> makeDefault(@PathVariable(value = "id") final Long id) throws Throwable  {
+		log.debug("REST request to update default Workspace : {}, {}", id);
+		if (!workspaceRepository.existsById(id)) {
+			throw new BadRequestAlertException("Entity not found", ENTITY_NAME, IDNOTFOUND);
+		}
+		Optional<Workspace> result = workspaceService.updateDefault(id);
+		return ResponseUtils.wrapOrNotFound(
+				result,
+				HeaderUtils.createEntityUpdateAlert(APP_NAME, false, ENTITY_NAME, id.toString()),
+				String.format("%s with Id %s is Not found!", ENTITY_NAME, id));
+	}
+
 	@PatchMapping(value = "/workspaces/{id}", consumes = { "application/json", "application/merge-patch+json" })
 	public ResponseEntity<Workspace> partialUpdateWorkspace(
 			@PathVariable(value = "id", required = false) final Long id,

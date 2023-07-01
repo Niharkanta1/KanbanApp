@@ -35,6 +35,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public Optional<Board> toggleFavorite(Long id) {
+		return boardRepository.findById(id).map(existingBoard -> {
+			existingBoard.setIsFavorite(!existingBoard.getIsFavorite());
+			return existingBoard;
+		}).map(boardRepository::save);
+	}
+
+	@Override
+	public Optional<Board> closeBoard(Long id) {
+		return boardRepository.findById(id).map(existingBoard -> {
+			existingBoard.setIsClosed(true);
+			return existingBoard;
+		}).map(boardRepository::save);
+	}
+
+	@Override
 	public Board saveBoardForWorkspace(Board board, Workspace workspace) {
 		log.info("Request to save Board:: board name::{} with Workspace:: workspace name::{}", board.getName(), workspace.getName());
 		board.setWorkspace(workspace);
@@ -79,7 +95,7 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional(readOnly = true)
 	public List<Board> findAllForWorkspace(Long workspaceId) {
 		log.info("Request to find all boards for workspace::{}", workspaceId);
-		return boardRepository.findByWorkspaceId(workspaceId);
+		return boardRepository.findByWorkspaceIdAndIsClosed(workspaceId, false);
 	}
 
 	@Override

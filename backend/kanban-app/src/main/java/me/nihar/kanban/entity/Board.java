@@ -40,10 +40,10 @@ public class Board extends BaseEntity implements Serializable {
 	private String description;
 
 	@Column(name = "is_favorite")
-	private Boolean isFavorite;
+	private Boolean isFavorite = false;
 
 	@Column(name = "is_closed")
-	private Boolean isClosed;
+	private Boolean isClosed = false;
 
 	@OneToMany(mappedBy = "board", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "cards", "board" }, allowSetters = true)

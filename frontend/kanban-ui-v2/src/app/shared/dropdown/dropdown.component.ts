@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { CommonService } from '../service/common.service';
 
@@ -17,6 +17,7 @@ export class DropdownComponent implements OnInit {
   @Input() options = [] as Option[];
   @Input() text = 'Sort By';
   @Input() inputName = 'sortBy';
+  @Output() selected = new EventEmitter();
 
   defaultName = '';
 
@@ -41,6 +42,7 @@ export class DropdownComponent implements OnInit {
     this.unselectAllOptions();
     item.selected = true;
     this.text = item.label;
+    this.selected.emit(item);
   }
 
   unselectAllOptions() {

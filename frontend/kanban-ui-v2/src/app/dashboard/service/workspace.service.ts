@@ -24,4 +24,11 @@ export class WorkspaceService {
       workspace
     );
   }
+
+  makeDefault(id: number) {
+    return this.http.put<Workspace>(
+      `${this.workspaceApi}/${id}/make-default`,
+      {}
+    );
+  }
 }

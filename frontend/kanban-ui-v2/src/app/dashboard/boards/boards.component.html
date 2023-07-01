@@ -6,12 +6,14 @@
       inputName="sortBy"
       text="Sort By"
       [options]="sortByOptions"
+      (selected)="onSortByOptionSelected($event)"
     ></app-dropdown>
     <app-dropdown
       style="margin-left: 10px"
       inputName="filterBy"
       text="Filter By"
       [options]="filterByOptions"
+      (selected)="onFilterByOptionSelected($event)"
     ></app-dropdown>
     <button style="margin-left: 10px" class="ui button" (click)="clearFilter()">
       Clear Filter
@@ -28,7 +30,7 @@
 
 <!-- Board Cards -->
 <div class="ui four cards" style="padding-top: 20px">
-  <a class="card" *ngFor="let item of boards">
+  <a class="card" *ngFor="let item of filteredBoards">
     <div class="content">
       <div class="header">{{ item.name }}</div>
       <div class="description">{{ item.description }}</div>
@@ -36,9 +38,9 @@
     <div class="extra content">
       <app-boards-edit [board]="item" [workspace]="workspace"></app-boards-edit>
       <a
-        (click)="markFavorite(item, $event)"
+        (click)="toggleFavorite(item, $event)"
         class="right floated star"
-        [ngStyle]="item.isFavorite ? { color: 'gold' } : {}"
+        [ngStyle]="item.isFavorite ? { color: 'purple' } : {}"
       >
         <i class="star icon"></i>
         Favorite

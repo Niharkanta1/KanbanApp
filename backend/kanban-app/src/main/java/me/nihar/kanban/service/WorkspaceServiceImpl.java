@@ -154,4 +154,18 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		workspaceRepository.flush();
 		log.info("Default Workspace created successfully.", ws);
 	}
+
+	@Override
+	public Optional<Workspace> updateDefault(Long id) {
+		workspaceRepository.findByUserId(AuthUtils.getCurrentUserId()).stream().map(workspace -> {
+			if(workspace.getId().equals(id)) {
+				workspace.setIsDefault(true);
+			} else {
+				workspace.setIsDefault(false);
+			}
+			return workspace;
+		}).forEach(ws -> workspaceRepository.save(ws));
+		workspaceRepository.flush();
+		return workspaceRepository.findById(id);
+	}
 }

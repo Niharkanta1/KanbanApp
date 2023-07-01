@@ -22,7 +22,7 @@
             tabindex="0"
             [checked]="workspace.isDefault"
             [disabled]="workspace.isDefault"
-            (onchange)="toggleDefault()"
+            (change)="makeDefault()"
           />
           <label>Default</label>
         </div>
