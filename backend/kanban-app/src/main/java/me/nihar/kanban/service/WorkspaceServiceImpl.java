@@ -147,6 +147,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		list.setUserCreated(Constants.SYSTEM);
 		list.setDateCreated(new Date());
 		list.setBoard(board);
+		board.addStageList(list);
 
 		list = new StageList();
 		list.setName("Done");

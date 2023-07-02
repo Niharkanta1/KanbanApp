@@ -1,8 +1,11 @@
 <div class="ui grid">
-  <div class="four wide column" *ngFor="let stage of stageLists">
-    <div class="ui container segments" style="height: 49em">
+  <div class="five wide column" *ngFor="let stage of stageLists">
+    <div class="ui container segments">
       <div class="ui segment">
         <p>{{ stage.name }}</p>
+      </div>
+      <div class="ui segment">
+        <p>Watching: {{ stage.isWatching }}</p>
       </div>
     </div>
   </div>
