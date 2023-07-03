@@ -16,6 +16,10 @@ export class BoardService {
     return this.http.get<Board[]>(this.boardApi, { params });
   }
 
+  getBoard(id: any) {
+    return this.http.get<Board>(`${this.boardApi}/${id}`);
+  }
+
   createBoard(board: Board, workspaceId: number) {
     let params = new HttpParams();
     params = params.append('workspaceId', workspaceId);

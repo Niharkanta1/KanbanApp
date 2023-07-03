@@ -128,7 +128,7 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		board.setWorkspace(defaultWorkspace);
 
 		StageList list = new StageList();
-		list.setName("List 1");
+		list.setName("To-Do");
 		list.setUserCreated(Constants.SYSTEM);
 		list.setDateCreated(new Date());
 		list.setBoard(board);
@@ -143,7 +143,13 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		board.addStageList(list);
 
 		list = new StageList();
-		list.setName("List 2");
+		list.setName("Doing");
+		list.setUserCreated(Constants.SYSTEM);
+		list.setDateCreated(new Date());
+		list.setBoard(board);
+
+		list = new StageList();
+		list.setName("Done");
 		list.setUserCreated(Constants.SYSTEM);
 		list.setDateCreated(new Date());
 		list.setBoard(board);

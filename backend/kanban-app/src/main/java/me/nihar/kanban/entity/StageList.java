@@ -40,7 +40,7 @@ public class StageList extends BaseEntity implements Serializable {
 	private String description;
 
 	@Column(name = "is_watching")
-	private Boolean isWatching;
+	private Boolean isWatching = false;
 
 	@OneToMany(mappedBy = "stageList", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, orphanRemoval = true)
 	@JsonIgnoreProperties(value = { "checkLists", "attachments", "labels", "members", "stageList" }, allowSetters = true)

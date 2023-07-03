@@ -30,7 +30,12 @@
 
 <!-- Board Cards -->
 <div class="ui four cards" style="padding-top: 20px">
-  <a class="card" *ngFor="let item of filteredBoards">
+  <a
+    class="card"
+    *ngFor="let item of filteredBoards"
+    [routerLink]="'stage/' + item.id"
+    routerLinkActive="active"
+  >
     <div class="content">
       <div class="header">{{ item.name }}</div>
       <div class="description">{{ item.description }}</div>

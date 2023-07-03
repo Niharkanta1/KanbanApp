@@ -2,7 +2,9 @@
   class="ui left vertical sidebar menu zIndex10"
   [ngClass]="sidebarVisible ? 'visible' : ''"
 >
-  <a class="item"> <i class="home icon"></i> {{ selectedWorkspace.name }} </a>
+  <a class="item" routerLink="/dashboard">
+    <i class="home icon"></i> {{ selectedWorkspace.name }}
+  </a>
   <a class="item"> <i class="block layout icon"></i> Boards </a>
   <a class="item"> <i class="users icon"></i> Users </a>
   <a class="item"> <i class="calendar icon"></i> History </a>

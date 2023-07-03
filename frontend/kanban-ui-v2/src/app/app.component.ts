@@ -3,6 +3,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthStatus } from './shared/model/AuthStatus';
 import { CommonService } from './shared/service/common.service';
 import { Workspace } from './shared/model/Workspace';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private cdRef: ChangeDetectorRef,
-    private commService: CommonService
+    private commService: CommonService,
+    private router: Router
   ) {
     commService.workspaces$.subscribe((result) => {
       this.workspaces = result;
@@ -65,5 +67,6 @@ export class AppComponent {
 
   selectWorkspace(item: Workspace) {
     this.commService.selectedWorkspace$.next(item);
+    this.router.navigateByUrl('/dashboard');
   }
 }

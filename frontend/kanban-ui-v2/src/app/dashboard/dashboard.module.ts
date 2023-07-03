@@ -14,6 +14,7 @@ import { NotificationsModule } from '../notifications/notifications.module';
 import { BoardsAddComponent } from './boards-add/boards-add.component';
 import { BoardsEditComponent } from './boards-edit/boards-edit.component';
 import { BoardsFormComponent } from './boards-form/boards-form.component';
+import { StageComponent } from './stage/stage.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BoardsFormComponent } from './boards-form/boards-form.component';
     BoardsAddComponent,
     BoardsEditComponent,
     BoardsFormComponent,
+    StageComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule],
   exports: [WorkspaceAddComponent, WorkspaceFormComponent],
