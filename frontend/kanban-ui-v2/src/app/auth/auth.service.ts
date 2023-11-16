@@ -43,6 +43,7 @@ export class AuthService {
   }
 
   signIn(user: Login) {
+    console.log('On sign in', user);
     return this.http.post<LoginResponse>(this.loginApi, user).pipe(
       tap((res) => {
         this.signedin$.next(AuthStatus.signedIn);
